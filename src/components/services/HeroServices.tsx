@@ -1,49 +1,31 @@
-import Logo from "../../assets/logo.svg";
+import React from "react";
 
 const HeroServices = () => {
   return (
-    <div className="w-full h-[500px] flex justify-center items-center pt-14 mb-10 relative group">
-      {/* Layer 1 - Top */}
-      <div className="absolute bg-black border-x-2 border-white/20 scale-[0.9] group-hover:scale-[0.8] shadow-[0_0_20px_0px_#000000] rounded-[30px] w-full h-[230px] flex justify-center items-center z-30 transition-transform duration-700">
-        <img src={Logo} className="w-full h-auto object-cover mb-4" alt="" />
-      </div>
+    <>
+      <div className="w-full max-w-[1440px] h-auto mx-auto flex flex-col justify-start items-center">
+        <h1 className="text-[170px] text-center font-black uppercase tracking-widest bg-gradient-to-b from-white/15 to-transparent bg-clip-text text-transparent">
+          Our Services
+        </h1>
+        <div className="relative h-[40px] -mt-[72px] w-[150px] rounded-[50px] overflow-hidden bg-white/10">
+          <div className="glow-effect clockwise"></div>
+          <div className="glow-effect counter-clockwise"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white text-[19px] font-black z-10">
+              Case Studies
+            </span>
+          </div>
+          <div className="absolute inset-[1.5px] rounded-[48px] bg-black/80 z-0"></div>
+        </div>
 
-      {/* Layer 2 */}
-      <div className="absolute w-full flex justify-center items-center">
-        <div className="absolute scale-[0.8] group-hover:scale-[0.7] mb-[130px] bg-black border-x-2 border-white/20 shadow-[0_0_20px_0px_#000000] rounded-[50px] w-full h-[230px] flex justify-center items-center z-20 transition-transform duration-700 delay-100">
-          <img
-            src={Logo}
-            className="w-full h-auto object-cover mb-4 opacity-75"
-            alt=""
-          />
-        </div>
-        <div className="absolute scale-[0.8] group-hover:scale-[0.7] mt-[130px] bg-black border-x-2 border-white/20 shadow-[0_0_20px_0px_#000000] rounded-[50px] w-full h-[230px] flex justify-center items-center z-20 transition-transform duration-700 delay-100">
-          <img
-            src={Logo}
-            className="w-full h-auto object-cover mb-4 opacity-75"
-            alt=""
-          />
-        </div>
+        <h1 className="text-[40px] mt-6 text-center font-black uppercase tracking-widest bg-white bg-clip-text text-transparent">
+          Showcasing Our Impact and
+        </h1>
+        <h1 className="text-[50px] -mt-5 text-center font-black uppercase tracking-widest bg-gradient-to-r from-lime-400 to-lime-400/20 bg-clip-text text-transparent">
+          Innovation.
+        </h1>
       </div>
-
-      {/* Layer 3 */}
-      <div className="absolute w-full flex justify-center items-center">
-        <div className="absolute scale-[0.7] group-hover:scale-[0.6] mb-[260px] bg-black border-x-2 border-white/20 shadow-[0_0_20px_0px_#000000] rounded-[50px] w-full h-[230px] flex justify-center items-center z-10 transition-transform duration-700 delay-[200ms]">
-          <img
-            src={Logo}
-            className="w-full h-auto object-cover mb-4 opacity-50"
-            alt=""
-          />
-        </div>
-        <div className="absolute scale-[0.7] group-hover:scale-[0.6] mt-[260px] bg-black border-x-2 border-white/20 shadow-[0_0_20px_0px_#000000] rounded-[50px] w-full h-[230px] flex justify-center items-center z-10 transition-transform duration-700 delay-[200ms]">
-          <img
-            src={Logo}
-            className="w-full h-auto object-cover mb-4 opacity-50"
-            alt=""
-          />
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -88,7 +88,7 @@ const ServiceCards = () => {
   ];
 
   return (
-    <div className="space-y-14 pt-14 pb-2 px-28">
+    <div className="space-y-14 pt-14 pb-2 px-28 w-full h-auto max-w-[1440px] mx-auto">
       {films.map((film, index) => (
         <FilmContainer
           key={film.id}
