@@ -26,7 +26,7 @@ const Section = ({
 
   return (
     <div
-      className={`content-wrapper ${
+      className={`w-full h-auto max-w-[1440px] max-h-[600px] mx-auto content-wrapper ${
         variant === "alt" ? "alt-style" : variant === "alt2" ? "alt-style2" : ""
       }`}
       ref={ref}

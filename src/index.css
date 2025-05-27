@@ -367,3 +367,53 @@ html {
   font-size: 1.2rem;
   line-height: 1.6;
 }
+
+/* Service Component Title */
+.glow-effect {
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.glow-effect::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 200%;
+  height: 200%;
+  aspect-ratio: 1/1;
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    #a3e635,
+    rgba(0, 0, 0, 0) 30%
+  );
+  border-radius: 50%;
+}
+
+/* Clockwise Animation */
+.clockwise::before {
+  animation: rotate-clockwise 4s linear infinite;
+  filter: blur(10px);
+}
+
+/* Counter-clockwise Animation */
+.counter-clockwise::before {
+  animation: rotate-counter-clockwise 4s linear infinite;
+  filter: blur(15px);
+  opacity: 0.8;
+}
+
+@keyframes rotate-clockwise {
+  100% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+@keyframes rotate-counter-clockwise {
+  100% {
+    transform: translate(-50%, -50%) rotate(-1turn);
+  }
+}
