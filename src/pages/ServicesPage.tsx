@@ -1,4 +1,4 @@
-// import HeroServices from "../components/services/HeroServices";
+import HeroServices from "../components/services/HeroServices";
 import ServiceCards from "../components/services/ServiceCards";
 import ServicesList from "../components/services/ServicesList";
 
@@ -6,7 +6,7 @@ const ServicesPage = () => {
   return (
     <>
       <div className="min-w-screen h-auto scroll-smooth">
-        {/* <HeroServices /> */}
+        <HeroServices />
         <ServiceCards />
         <ServicesList />
       </div>
