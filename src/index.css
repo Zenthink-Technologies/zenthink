@@ -41,6 +41,19 @@ html {
 @tailwind components;
 @tailwind utilities;
 
+/* User No Select */
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  pointer-events: none;
+}
+
 /* WebKit Scrollbar Style */
 ::-webkit-scrollbar {
   width: 10px;
@@ -112,6 +125,30 @@ html {
   height: 100%;
   content: "";
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .marquee:before,
+  .marquee:after {
+    position: absolute;
+    top: 0;
+    width: 8rem;
+    height: 100%;
+    content: "";
+    z-index: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .marquee:before,
+  .marquee:after {
+    position: absolute;
+    top: 0;
+    width: 3rem;
+    height: 100%;
+    content: "";
+    z-index: 1;
+  }
 }
 
 .marquee:before {
@@ -196,6 +233,38 @@ html {
   white-space: nowrap;
 }
 
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+  .marquee {
+    width: var(--marquee-width);
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+  }
+  .marquee-content li {
+    margin: 0 30px;
+    width: calc(var(--marquee-element-width) * 0.5);
+    font-size: calc(var(--marquee-height) * 0.4);
+  }
+}
+
+@media (max-width: 480px) {
+  .marquee {
+    width: var(--marquee-width);
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+  }
+  .marquee-content li {
+    margin: 0 10px;
+    width: calc(var(--marquee-element-width) * 0.5);
+    font-size: calc(var(--marquee-height) * 0.4);
+  }
+}
+
+/* Base styles (mobile-first approach) */
 .marquee-content-service li {
   display: flex;
   justify-content: center;
@@ -203,8 +272,8 @@ html {
   flex-shrink: 0;
   width: 80px;
   height: 80px;
-  padding: 15px 0px;
-  font-size: calc(var(--marquee-height) * 3 / 4);
+  padding: 10px 0;
+  font-size: 14px;
   white-space: nowrap;
   box-shadow: inset -5px 0 5px rgba(255, 255, 255, 0.01),
     inset 1.5px 0 1.5px rgba(255, 255, 255, 0.05);

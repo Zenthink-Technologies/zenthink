@@ -4,7 +4,7 @@ import Peoples from "../../assets/about/peoples.png";
 const Journey = () => {
   return (
     <>
-      <div className="pb-16 pt-24 px-28 w-full max-w-[1440px] mx-auto">
+      <div className="pb-16 pt-16 md:pt-24 px-6 md:px-20 lg:px-28 w-full max-w-[1440px] mx-auto">
         <div className="flex flex-col lg:flex-row gap-10 items-center justify-between mx-auto">
           {/* Left Section: Text and Image */}
           <div className="flex-1 flex flex-col justify-between items-start gap-6 h-[450px]">
@@ -20,10 +20,10 @@ const Journey = () => {
               >
                 Our Journey
               </div>
-              <h1 className="text-[50px] font-black text-start mb-2 leading-[52px]">
+              <h1 className="text-[30px] md:text-[40px] xl:text-[50px] font-black text-start mb-2 leading-[32px] md:leading-[40px] xl:leading-[52px]">
                 Our journey towards business excellence.
               </h1>
-              <p className="text-[17px] text-white/50 text-start leading-5">
+              <p className="text-[13px] md:text-[15px] xl:text-[17px] text-white/50 text-start leading-5">
                 Donec sit dolor et at ut id. Libeperdiet laoreet nunc venenatis.
                 Sem ac dui mauris pharetra dui enim morbi ipsum ut.
               </p>
@@ -32,7 +32,7 @@ const Journey = () => {
               <img
                 src={Team}
                 alt="Hands in collaboration"
-                className="w-full h-auto object-cover saturate-0"
+                className="w-full h-full object-cover saturate-0"
               />
             </div>
           </div>
@@ -42,7 +42,7 @@ const Journey = () => {
             <img
               src={Peoples}
               alt="Team members"
-              className="w-auto h-full object-cover saturate-0"
+              className="w-full h-full object-cover saturate-0"
             />
           </div>
         </div>

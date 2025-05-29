@@ -3,12 +3,20 @@
     "development"
   ],
   "hints": {
-    "compat-api/css": [
+    "compat-api/css": "off",
+    "no-inline-styles": "off",
+    "compat-api/html": [
       "default",
       {
         "ignore": [
-          "backdrop-filter"
+          "meta[name=theme-color]"
         ]
+      }
+    ],
+    "axe/aria": [
+      "default",
+      {
+        "aria-valid-attr-value": "off"
       }
     ]
   }

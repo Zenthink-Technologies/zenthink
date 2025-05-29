@@ -87,93 +87,101 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-28 pt-24 pb-10 flex flex-col md:flex-row gap-16">
+    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 xl:px-28 pt-12 md:pt-16 lg:pt-24 pb-10 flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16">
       {/* Left section */}
-      <div className="flex-1 flex flex-col justify-between items-start">
-        <div className="">
-          <h2 className="text-[50px] font-black">Contact Us</h2>
-          <p className="text-[18px] text-white/50 leading-6 mb-20">
+      <div className="flex-1 flex flex-col md:flex-row lg:flex-col justify-between items-start gap-x-8">
+        <div className="w-full">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black">
+            Contact Us
+          </h2>
+          <p className="text-base sm:text-lg md:text-[16px] lg:text-[18px] text-white/50 md:leading-5 lg:leading-6 mb-8 sm:mb-12 md:mb-20">
             Team tristique nisl pretium. Purus fames in gravida blandit magna
             imperdiet posuere pellentesque.
           </p>
         </div>
 
-        <div className="w-[400px] space-y-6">
+        <div className="w-full max-w-[350px] lg:max-w-[400px] space-y-4 sm:space-y-5">
           {/* Card 1 */}
           <div
-            className="flex items-center justify-between bg-white/5 p-6 rounded-xl shadow-md"
+            className="flex items-center justify-between bg-white/5 p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-md"
             style={{
               boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.01),
-    inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
-  `,
+                inset 0 -5px 5px rgba(255, 255, 255, 0.01),
+                inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
+              `,
             }}
           >
-            <div className="flex items-center gap-4">
-              <div className="bg-black/60 rounded-full w-12 h-12 flex justify-center items-center">
-                <PhoneCall className="text-lime-500 w-5 h-5" />
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-black/60 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex justify-center items-center">
+                <PhoneCall className="text-lime-500 w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <p className="font-semibold">Give us call</p>
-                <p className="text-white/50 text-[15px] font-sans font-medium">
+                <p className="font-semibold text-sm sm:text-base">
+                  Give us call
+                </p>
+                <p className="text-white/50 text-sm sm:text-[15px] font-sans font-medium">
                   ( +91 ) 99445 00207
                 </p>
               </div>
             </div>
-            <div className="bg-white/10 rounded-full w-10 h-10 flex justify-center items-center">
-              <ArrowUpRight className="text-white w-5 h-5" />
+            <div className="bg-white/10 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex justify-center items-center">
+              <ArrowUpRight className="text-white w-3 h-3 sm:w-5 sm:h-5" />
             </div>
           </div>
 
           {/* Card 2 */}
           <div
-            className="flex items-center justify-between bg-white/5 p-6 rounded-xl shadow-md"
+            className="flex items-center justify-between bg-white/5 p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-md"
             style={{
               boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.01),
-    inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
-  `,
+                inset 0 -5px 5px rgba(255, 255, 255, 0.01),
+                inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
+              `,
             }}
           >
-            <div className="flex items-center gap-4">
-              <div className="bg-black/60 rounded-full w-12 h-12 flex justify-center items-center">
-                <MapPin className="text-lime-500 w-5 h-5" />
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-black/60 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex justify-center items-center">
+                <MapPin className="text-lime-500 w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <p className="font-semibold">Our Location</p>
-                <p className="text-white/50 text-[17px] font-medium">
-                  Tiruchengode, tamil nadu, India
+                <p className="font-semibold text-sm sm:text-base">
+                  Our Location
+                </p>
+                <p className="text-white/50 text-sm sm:text-[17px] font-medium">
+                  Tiruchengode, India
                 </p>
               </div>
             </div>
-            <div className="bg-white/10 rounded-full w-10 h-10 flex justify-center items-center">
-              <ArrowUpRight className="text-white w-5 h-5" />
+            <div className="bg-white/10 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex justify-center items-center">
+              <ArrowUpRight className="text-white w-3 h-3 sm:w-5 sm:h-5" />
             </div>
           </div>
 
           {/* Card 3 */}
           <div
-            className="flex items-center justify-between bg-white/5 p-6 rounded-xl shadow-md"
+            className="flex items-center justify-between bg-white/5 p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-md"
             style={{
               boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.01),
-    inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
-  `,
+                inset 0 -5px 5px rgba(255, 255, 255, 0.01),
+                inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
+              `,
             }}
           >
-            <div className="flex items-center gap-4">
-              <div className="bg-black/60 rounded-full w-12 h-12 flex justify-center items-center">
-                <Mail className="text-lime-500 w-5 h-5" />
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-black/60 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex justify-center items-center">
+                <Mail className="text-lime-500 w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <p className="font-semibold">Send us Email</p>
-                <p className="text-white/50 text-[17px] font-medium">
-                  zenthinktechnologies<b className="font-sans">@</b>gmail.com
+                <p className="font-semibold text-sm sm:text-base">
+                  Send us Email
+                </p>
+                <p className="text-white/50 text-sm sm:text-[17px] font-medium">
+                  info<b className="font-sans">@</b>zenthink.in
                 </p>
               </div>
             </div>
-            <div className="bg-white/10 rounded-full w-10 h-10 flex justify-center items-center">
-              <ArrowUpRight className="text-white w-5 h-5" />
+            <div className="bg-white/10 rounded-full w-8 h-8 sm:w-10 sm:h-10 flex justify-center items-center">
+              <ArrowUpRight className="text-white w-3 h-3 sm:w-5 sm:h-5" />
             </div>
           </div>
         </div>
@@ -181,78 +189,78 @@ const Contact = () => {
 
       {/* Right section */}
       <div
-        className="flex-1 bg-white/5 p-8 rounded-[30px] shadow-md"
+        className="flex-1 bg-white/5 p-5 sm:p-8 rounded-2xl sm:rounded-[30px] shadow-md"
         style={{
           boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.01),
-    inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
-  `,
+            inset 0 -5px 5px rgba(255, 255, 255, 0.01),
+            inset 0 2px 1.5px rgba(255, 255, 255, 0.05)
+          `,
         }}
       >
-        <form className="space-y-4">
+        <form className="space-y-3 sm:space-y-4">
           <div>
-            <label className="block text-[17px] font-black mb-2">
+            <label className="block text-[16px] sm:text-[17px] font-black mb-1 sm:mb-2">
               Full name
             </label>
             <input
               type="text"
               placeholder="Ex. Jone Alex"
-              className="w-full px-4 py-3 bg-black rounded-lg shadow-md focus:outline-none focus:border-lime-500"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-black text-[12px] md:text-[16px] rounded-lg shadow-md focus:outline-none focus:border-lime-500"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
+                `,
               }}
             />
           </div>
 
           <div>
-            <label className="block text-[17px] font-black mb-2">
+            <label className="block text-[16px] sm:text-[17px] font-black mb-1 sm:mb-2">
               Phone number
             </label>
             <input
               type="text"
               placeholder="Ex.(225) 555-0118"
-              className="w-full px-4 py-3 bg-black font-sans rounded-lg shadow-md focus:outline-none focus:border-lime-500"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-black text-[12px] md:text-[16px] font-sans rounded-lg shadow-md focus:outline-none focus:border-lime-500"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
+                `,
               }}
             />
           </div>
 
           <div>
-            <label className="block text-[17px] font-black mb-2">
+            <label className="block text-[16px] sm:text-[17px] font-black mb-1 sm:mb-2">
               Email Address
             </label>
             <input
               type="email"
               placeholder="Ex. jone@example.com"
-              className="w-full px-4 py-3 bg-black font-sans rounded-lg shadow-md focus:outline-none focus:border-lime-500"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-black text-[12px] md:text-[16px] font-sans rounded-lg shadow-md focus:outline-none focus:border-lime-500"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
+                `,
               }}
             />
           </div>
 
           <div>
-            <label className="block text-[17px] font-black mb-2">
+            <label className="block text-[16px] sm:text-[17px] font-black mb-1 sm:mb-2">
               Leave Us a Message
             </label>
             <textarea
               placeholder="Write Your Message here..."
-              className="w-full h-[120px] resize-none px-4 py-3 bg-black rounded-lg shadow-md focus:outline-none focus:border-lime-500"
+              className="w-full h-[100px] sm:h-[120px] resize-none px-3 py-2 sm:px-4 sm:py-3 bg-black text-[12px] md:text-[16px] rounded-lg shadow-md focus:outline-none focus:border-lime-500"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.15)
+                `,
               }}
             ></textarea>
           </div>
@@ -261,7 +269,7 @@ const Contact = () => {
             ref={buttonRef}
             type="submit"
             className="
-              relative px-6 w-full h-[48px] bg-lime-500 text-white font-extrabold 
+              relative px-6 w-full h-[40px] sm:h-[48px] bg-lime-500 text-white font-extrabold 
               rounded-full border-2 border-lime-400
               transition-all duration-300 ease-linear
               [box-shadow:inset_2px_2px_4px_0_rgba(0,0,0,0.1),inset_-2px_-2px_4px_0_rgba(255,255,255,0.2)]
@@ -271,6 +279,7 @@ const Contact = () => {
               after:-translate-x-1/2 after:w-3 after:h-3
               after:rounded-full
               overflow-hidden
+              text-sm sm:text-base
             "
             onClick={(e) => {
               e.preventDefault();

@@ -41,8 +41,8 @@ const values = [
 
 const Values = () => {
   return (
-    <div className="py-16 px-48">
-      <h2 className="text-[55px] font-semibold text-center leading-[60px] mb-12">
+    <div className="py-10 md:py-16 md:px-20 lg:px-48">
+      <h2 className="text-[30px] md:text-[40px] lg:text-[55px] font-semibold text-center leading-[32px] md:leading-[45px] lg:leading-[60px] mb-12">
         Guiding values for our <br />
         success
       </h2>

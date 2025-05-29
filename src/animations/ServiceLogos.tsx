@@ -37,7 +37,7 @@ const ServiceLogos: React.FC = () => {
           {icons.map((icon, index) => (
             <li
               key={index}
-              className="bg-black/10 rounded-lg flex justify-center items-center p-1 overflow-hidden"
+              className="bg-[#0c0c0c] rounded-lg flex justify-center items-center p-1 overflow-hidden"
             >
               <img src={icon} className="rotate-90" alt={`logo-${index}`} />
             </li>

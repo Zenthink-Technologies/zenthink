@@ -1,7 +1,7 @@
 // import AnimatedServices from "../components/services/AnimatedServices";
 import HeroServices from "../components/services/HeroServices";
 import ServiceCards from "../components/services/ServiceCards";
-import ServicesList from "../components/services/ServicesList";
+// import ServicesList from "../components/services/ServicesList";
 
 const ServicesPage = () => {
   return (
@@ -10,7 +10,7 @@ const ServicesPage = () => {
         {/* <AnimatedServices /> */}
         <HeroServices />
         <ServiceCards />
-        <ServicesList />
+        {/* <ServicesList /> */}
       </div>
     </>
   );
