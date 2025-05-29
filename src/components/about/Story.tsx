@@ -3,14 +3,14 @@ import Meet from "../../assets/about/meet.png";
 const Story = () => {
   return (
     <>
-      <div className="py-16 px-28 w-full max-w-[1440px] mx-auto">
-        <div className="flex flex-col lg:flex-row gap-10 items-center justify-between mx-auto">
+      <div className="pb-10 md:pb-16 pt-5 md:pt-24 px-6 md:px-20 lg:px-28 w-full max-w-[1440px] mx-auto">
+        <div className="flex flex-col-reverse lg:flex-row gap-10 items-center justify-between mx-auto">
           {/* Right Section: Team Image */}
           <div className="flex-1 w-full h-[350px] overflow-hidden rounded-xl shadow-[0_0_20px_5px_rgba(26,46,5,0.5)]">
             <img
               src={Meet}
               alt="Team members"
-              className="w-full h-auto object-cover saturate-0"
+              className="w-full h-full object-cover saturate-0"
             />
           </div>
 
@@ -28,10 +28,10 @@ const Story = () => {
               >
                 Our Story
               </div>
-              <h1 className="text-[50px] font-black text-start mb-4 leading-[52px]">
+              <h1 className="text-[30px] md:text-[40px] xl:text-[50px] font-black text-start mb-4 leading-[32px] md:leading-[40px] xl:leading-[52px]">
                 Guiding principles of our company.
               </h1>
-              <p className="text-[17px] text-white/50 text-start leading-5">
+              <p className="text-[13px] md:text-[15px] xl:text-[17px] text-white/50 text-start leading-5">
                 <span className="inline-flex items-start mb-3">
                   <span className="min-w-2 h-2 bg-lime-500 rounded-full mt-1.5 mr-2"></span>
                   <span className="text-white/50">

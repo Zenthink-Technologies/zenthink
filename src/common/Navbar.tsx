@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Tabs, Tab } from "@heroui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { X } from "lucide-react";
+import Triangle from "../assets/triangle.svg";
 
 interface Particle {
   element: HTMLDivElement;
@@ -22,6 +24,8 @@ interface TabContent {
 }
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
@@ -29,6 +33,21 @@ const Navbar = () => {
   const leaveTimeout = useRef<NodeJS.Timeout | null>(null);
   const contentTimeout = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
+  const bodyRef = useRef<HTMLBodyElement | null>(null);
+
+  useEffect(() => {
+    bodyRef.current = document.querySelector("body");
+
+    if (isExpanded || isOpen) {
+      bodyRef.current?.classList.add("overflow-hidden");
+    } else {
+      bodyRef.current?.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      bodyRef.current?.classList.remove("overflow-hidden");
+    };
+  }, [isExpanded, isOpen]);
   const navigate = useNavigate();
 
   // Tab content data
@@ -87,7 +106,9 @@ const Navbar = () => {
   };
 
   // Get current active tab from route
-  const activeTab = location.pathname.split("/")[1] || "home";
+  const activeTab = location.pathname.startsWith("/blog/")
+    ? "blogs"
+    : location.pathname.split("/")[1] || "home";
 
   // Clear timeouts on unmount
   useEffect(() => {
@@ -103,6 +124,7 @@ const Navbar = () => {
     if (leaveTimeout.current) clearTimeout(leaveTimeout.current);
 
     setIsExpanded(true);
+    setIsOpen(false);
     setHoveredTab(tabKey);
   };
 
@@ -237,6 +259,8 @@ const Navbar = () => {
           isExpanded
             ? location.pathname.startsWith("/blogs")
               ? "pb-16"
+              : location.pathname.startsWith("/blog/")
+              ? "pb-24"
               : location.pathname.startsWith("/contact")
               ? "pb-16"
               : location.pathname.startsWith("/services")
@@ -245,9 +269,9 @@ const Navbar = () => {
             : ""
         }`}
       >
-        <div className="flex justify-between items-start w-screen max-w-[1440px] mx-auto h-[60px] px-24">
+        <div className="flex justify-between items-start w-screen max-w-[1440px] mx-auto h-[50px] md:h-[60px] px-5 md:px-10 lg:px-20 xl:px-24">
           {/* Logo */}
-          <div className="w-[200px] bg-black/5 shadow-[0_0_20px_0px_#000000] rounded-full backdrop-blur-md h-full flex items-center -mt-2">
+          <div className="fixed px-2 md:relative w-[150px] h-[50px] md:h-[60px] md:w-[200px] lg:w-[160px] xl:w-[200px] bg-black/5 shadow-[0_0_20px_-10px_#a3e635] lg:shadow-[0_0_20px_0px_#000000] rounded-full backdrop-blur-sm lg:backdrop-blur-md lg:h-full flex items-center md:-mt-1 lg:-mt-2">
             <img
               src={logo}
               className="w-full h-auto object-cover"
@@ -255,10 +279,10 @@ const Navbar = () => {
             />
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex-1 flex justify-center items-center">
+          {/* Navigation Links Desktop */}
+          <div className="flex-1 hidden lg:flex justify-center items-center">
             <div
-              className={`relative shadow-[0_0_20px_0px_#000000] transition-all ease-in-out overflow-hidden ${
+              className={`scale-1 md:scale-[0.8] lg:scale-[0.9] xl:scale-[1] relative shadow-[0_0_20px_0px_#000000] transition-all ease-in-out overflow-hidden ${
                 isExpanded
                   ? "h-[208px] px-1.5 py-1.5 -mt-1.5 mb-10 rounded-[28px] duration-500"
                   : "h-[52px] rounded-[24px] duration-700"
@@ -278,7 +302,7 @@ const Navbar = () => {
     after:absolute after:bottom-1 after:left-1/2 
     after:rounded-full after:w-full after:h-[100px] after:top-5 after:bg-lime-600
     overflow-hidden
-    after:opacity-0 after:transition-opacity
+    after:opacity-0
     hover:after:opacity-100
     before:absolute before:bottom-0 before:left-0 before:right-0
     before:h-0 before:bg-gradient-to-t
@@ -307,7 +331,7 @@ const Navbar = () => {
                   onMouseEnter={() => handleTabEnter("home")}
                   onMouseLeave={handleTabLeave}
                   title={
-                    <div className="relative w-full h-full flex justify-center items-center">
+                    <div className="relative w-full h-full flex justify-center items-center cursor-pointer">
                       <span className="text-white text-[15px] font-semibold relative z-10">
                         Home
                       </span>
@@ -319,7 +343,7 @@ const Navbar = () => {
                   onMouseEnter={() => handleTabEnter("services")}
                   onMouseLeave={handleTabLeave}
                   title={
-                    <div className="relative w-full h-full flex justify-center items-center">
+                    <div className="relative w-full h-full flex justify-center items-center cursor-pointer">
                       <span className="text-white text-[15px] font-semibold relative z-10">
                         Services
                       </span>
@@ -331,7 +355,7 @@ const Navbar = () => {
                   onMouseEnter={() => handleTabEnter("blogs")}
                   onMouseLeave={handleTabLeave}
                   title={
-                    <div className="relative w-full h-full flex justify-center items-center">
+                    <div className="relative w-full h-full flex justify-center items-center cursor-pointer">
                       <span className="text-white text-[15px] font-semibold relative z-10">
                         Blogs
                       </span>
@@ -343,7 +367,7 @@ const Navbar = () => {
                   onMouseEnter={() => handleTabEnter("about")}
                   onMouseLeave={handleTabLeave}
                   title={
-                    <div className="relative w-full h-full flex justify-center items-center">
+                    <div className="relative w-full h-full flex justify-center items-center cursor-pointer">
                       <span className="text-white text-[15px] font-semibold relative z-10">
                         About
                       </span>
@@ -355,7 +379,7 @@ const Navbar = () => {
                   onMouseEnter={() => handleTabEnter("contact")}
                   onMouseLeave={handleTabLeave}
                   title={
-                    <div className="relative w-full h-full flex justify-center items-center">
+                    <div className="relative w-full h-full flex justify-center items-center cursor-pointer">
                       <span className="text-white text-[15px] font-semibold relative z-10">
                         Contact
                       </span>
@@ -411,12 +435,304 @@ const Navbar = () => {
             </div>
           </div>
 
+          {/* Menu Icon */}
+          <button
+            onClick={toggleMenu}
+            className={`p-2 fixed lg:hidden right-6 top-6 w-[50px] h-[50px] backdrop-blur-sm lg:backdrop-blur-md overflow-hidden space-x-10 flex justify-center items-center focus:outline-none z-50 shadow-[0_0_20px_-10px_#a3e635] hover:shadow-[0_0_20px_-10px_#ffffff] rounded-full transition-all duration-500 ease-linear ${
+              isOpen
+                ? "shadow-[0_0_20px_-10px_#ffffff] hover:shadow-[0_0_20px_-10px_#a3e635]"
+                : ""
+            }`}
+            aria-label="Toggle menu"
+          >
+            <img
+              src={Triangle}
+              className={`min-w-5 min-h-5 max-w-5 max-h-5 transform transition-all duration-500 ease-linear ${
+                isOpen
+                  ? "-translate-x-3 opacity-0"
+                  : "translate-x-[33px] opacity-1"
+              }`}
+              alt=""
+            />
+            <X
+              className={`min-w-7 min-h-7 max-w-7 max-h-7 transform transition-all duration-500 ease-linear ${
+                isOpen
+                  ? "-translate-x-[30px] opacity-1"
+                  : "translate-x-3 opacity-0"
+              }`}
+            />
+          </button>
+
+          {/* Navigation Links Mobile */}
+          <div
+            className={`lg:hidden fixed top-0 right-0 flex justify-center items-center h-full transition-all duration-500 ease-in-out ${
+              isOpen ? "translate-x-0" : "translate-x-[65vw]"
+            }`}
+          >
+            <div
+              className={`relative transition-all ease-in-out overflow-y-auto h-full w-[65vw] py-10 pt-28 rounded-l-[24px] duration-700 bg-gradient-to-tr from-black/70 to-white/0 backdrop-blur-lg bg-opacity-5 shadow-[0_0_20px_0_#000000,inset_0_-5px_5px_rgba(255,255,255,0.1),_inset_0_1px_2px_rgba(255,255,255,0.2)]`}
+              onMouseEnter={handleTabsEnter}
+              onMouseLeave={handleTabsLeave}
+            >
+              <div className="relative">
+                {/* Tab List */}
+                <div
+                  className="flex flex-col space-y-3 top-0 px-5"
+                  role="tablist"
+                  aria-label="Main navigation"
+                >
+                  {/* Home Tab */}
+                  <div
+                    role="tab"
+                    aria-selected={activeTab === "home"}
+                    className={`relative w-full flex justify-center items-center py-2.5 h-auto rounded-full cursor-pointer
+        group transition-all duration-300
+        after:absolute after:bottom-1 after:left-1/2 
+        after:rounded-full after:w-full after:h-[100px] after:top-5 after:bg-lime-600
+        overflow-hidden
+        after:opacity-0
+        hover:after:opacity-100
+        before:absolute before:bottom-0 before:left-0 before:right-0
+        before:h-0 before:bg-gradient-to-t
+        before:from-lime-800 before:via-transparent before:to-transparent
+        before:transition-all after:transition-all before:duration-700 after:duration-700 after:ease-in-out before:ease-in-out
+        after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)]
+        before:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.25)]
+        hover:before:h-full
+        ${
+          activeTab === "home"
+            ? "bg-gradient-to-br from-lime-600 to-lime-700 after:opacity-100 " +
+              "after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)] " +
+              "shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+            : ""
+        }
+      `}
+                    onMouseEnter={() => handleTabEnter("home")}
+                    onMouseLeave={handleTabLeave}
+                    onClick={() => {
+                      navigate("/");
+                    }}
+                  >
+                    <div className="relative w-full h-full flex justify-start pl-7 items-center">
+                      <span className="text-white text-[15px] font-semibold relative z-10">
+                        Home
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Services Tab */}
+                  <div
+                    role="tab"
+                    aria-selected={activeTab === "services"}
+                    className={`relative w-full flex justify-center items-center py-2.5 h-auto rounded-full cursor-pointer
+        group transition-all duration-300
+        after:absolute after:bottom-1 after:left-1/2 
+        after:rounded-full after:w-full after:h-[100px] after:top-5 after:bg-lime-600
+        overflow-hidden
+        after:opacity-0
+        hover:after:opacity-100
+        before:absolute before:bottom-0 before:left-0 before:right-0
+        before:h-0 before:bg-gradient-to-t
+        before:from-lime-800 before:via-transparent before:to-transparent
+        before:transition-all after:transition-all before:duration-700 after:duration-700 after:ease-in-out before:ease-in-out
+        after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)]
+        before:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.25)]
+        hover:before:h-full
+        ${
+          activeTab === "services"
+            ? "bg-gradient-to-br from-lime-600 to-lime-700 after:opacity-100 " +
+              "after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)] " +
+              "shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+            : ""
+        }
+      `}
+                    onMouseEnter={() => handleTabEnter("services")}
+                    onMouseLeave={handleTabLeave}
+                    onClick={() => {
+                      navigate("/services");
+                    }}
+                  >
+                    <div className="relative w-full h-full flex justify-start pl-7 items-center">
+                      <span className="text-white text-[15px] font-semibold relative z-10">
+                        Services
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Blogs Tab */}
+                  <div
+                    role="tab"
+                    aria-selected={activeTab === "blogs"}
+                    className={`relative w-full flex justify-center items-center py-2.5 h-auto rounded-full cursor-pointer
+        group transition-all duration-300
+        after:absolute after:bottom-1 after:left-1/2 
+        after:rounded-full after:w-full after:h-[100px] after:top-5 after:bg-lime-600
+        overflow-hidden
+        after:opacity-0
+        hover:after:opacity-100
+        before:absolute before:bottom-0 before:left-0 before:right-0
+        before:h-0 before:bg-gradient-to-t
+        before:from-lime-800 before:via-transparent before:to-transparent
+        before:transition-all after:transition-all before:duration-700 after:duration-700 after:ease-in-out before:ease-in-out
+        after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)]
+        before:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.25)]
+        hover:before:h-full
+        ${
+          activeTab === "blogs"
+            ? "bg-gradient-to-br from-lime-600 to-lime-700 after:opacity-100 " +
+              "after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)] " +
+              "shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+            : ""
+        }
+      `}
+                    onMouseEnter={() => handleTabEnter("blogs")}
+                    onMouseLeave={handleTabLeave}
+                    onClick={() => {
+                      navigate("/blogs");
+                    }}
+                  >
+                    <div className="relative w-full h-full flex justify-start pl-7 items-center">
+                      <span className="text-white text-[15px] font-semibold relative z-10">
+                        Blogs
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* About Tab */}
+                  <div
+                    role="tab"
+                    aria-selected={activeTab === "about"}
+                    className={`relative w-full flex justify-center items-center py-2.5 h-auto rounded-full cursor-pointer
+        group transition-all duration-300
+        after:absolute after:bottom-1 after:left-1/2 
+        after:rounded-full after:w-full after:h-[100px] after:top-5 after:bg-lime-600
+        overflow-hidden
+        after:opacity-0
+        hover:after:opacity-100
+        before:absolute before:bottom-0 before:left-0 before:right-0
+        before:h-0 before:bg-gradient-to-t
+        before:from-lime-800 before:via-transparent before:to-transparent
+        before:transition-all after:transition-all before:duration-700 after:duration-700 after:ease-in-out before:ease-in-out
+        after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)]
+        before:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.25)]
+        hover:before:h-full
+        ${
+          activeTab === "about"
+            ? "bg-gradient-to-br from-lime-600 to-lime-700 after:opacity-100 " +
+              "after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)] " +
+              "shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+            : ""
+        }
+      `}
+                    onMouseEnter={() => handleTabEnter("about")}
+                    onMouseLeave={handleTabLeave}
+                    onClick={() => {
+                      navigate("/about");
+                    }}
+                  >
+                    <div className="relative w-full h-full flex justify-start pl-7 items-center">
+                      <span className="text-white text-[15px] font-semibold relative z-10">
+                        About
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Contact Tab */}
+                  <div
+                    role="tab"
+                    aria-selected={activeTab === "contact"}
+                    className={`relative w-full flex justify-center items-center py-2.5 h-auto rounded-full cursor-pointer
+        group transition-all duration-300
+        after:absolute after:bottom-1 after:left-1/2 
+        after:rounded-full after:w-full after:h-[100px] after:top-5 after:bg-lime-600
+        overflow-hidden
+        after:opacity-0
+        hover:after:opacity-100
+        before:absolute before:bottom-0 before:left-0 before:right-0
+        before:h-0 before:bg-gradient-to-t
+        before:from-lime-800 before:via-transparent before:to-transparent
+        before:transition-all after:transition-all before:duration-700 after:duration-700 after:ease-in-out before:ease-in-out
+        after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)]
+        before:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.25)]
+        hover:before:h-full
+        ${
+          activeTab === "contact"
+            ? "bg-gradient-to-br from-lime-600 to-lime-700 after:opacity-100 " +
+              "after:shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)] " +
+              "shadow-[inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.2)]"
+            : ""
+        }
+      `}
+                    onMouseEnter={() => handleTabEnter("contact")}
+                    onMouseLeave={handleTabLeave}
+                    onClick={() => {
+                      navigate("/contact");
+                    }}
+                  >
+                    <div className="relative w-full h-full flex justify-start pl-7 items-center">
+                      <span className="text-white text-[15px] font-semibold relative z-10">
+                        Contact
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Expanded Content */}
+              {displayContent && (
+                <div
+                  className={`relative h-auto mt-4 mx-1.5 left-0 right-0 overflow-hidden ${
+                    displayContent ? "opacity-100" : "opacity-0"
+                  } px-2 pt-4`}
+                  onMouseEnter={handleContentEnter}
+                  onMouseLeave={handleContentLeave}
+                >
+                  <div className="bg-white/5 h-auto backdrop-blur-lg p-4 rounded-xl rounded-l-[23px] overflow-hidden border border-white/10 shadow-[inset_0_-2px_3px_rgba(255,255,255,0.1)]">
+                    <h3 className="text-white text-xl font-black mb-1">
+                      {displayContent.title}
+                    </h3>
+                    <p className="text-[13px] leading-4 text-justify text-white/80 mb-4">
+                      {displayContent.description}
+                    </p>
+                    {displayContent.features && (
+                      <ul className="flex flex-col justify-start items-start flex-wrap gap-y-0.5 gap-x-10">
+                        {displayContent.features.map((feature, index) => (
+                          <li key={index}>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.querySelector(
+                                  feature.path
+                                );
+                                if (element) {
+                                  element.scrollIntoView({
+                                    behavior: "smooth",
+                                  });
+                                }
+                              }}
+                              className="group flex justify-start text-nowrap items-center text-[14px] text-white hover:text-lime-500 transition-colors duration-200"
+                            >
+                              <span className="w-2 h-2 bg-lime-500 group-hover:bg-white rounded-full mr-2" />
+                              {feature.name}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* Hero Button */}
           <button
             ref={buttonRef}
             className="
-              shadow-[0_0_20px_0px_#000000]
-              relative px-6 h-[48px] bg-lime-500 text-white font-extrabold 
+              hidden lg:block
+              scale-1 md:scale-[0.8] lg:scale-[0.9] xl:scale-[1]
+              shadow-[0_0_20px_0px_#000000] lg:w-[120px] xl:w-[140px]
+              relative px-4 xl:px-6 h-[48px] bg-lime-500 text-white font-extrabold 
               rounded-full border-2 border-lime-400
               transition-all duration-300 ease-linear
               [box-shadow:inset_2px_2px_4px_0_rgba(0,0,0,0.1),inset_-2px_-2px_4px_0_rgba(255,255,255,0.2)]

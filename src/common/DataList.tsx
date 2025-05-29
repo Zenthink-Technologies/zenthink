@@ -12,7 +12,13 @@ const CONFIG = {
   columns: 4,
   itemsPerColumn: 4,
   scrollSpeed: 0.5,
-  itemHeight: 180,
+  getItemHeight: () => {
+    if (window.innerWidth < 640) return 50;
+    if (window.innerWidth < 1024) return 100;
+    if (window.innerWidth < 1280) return 150;
+    return 180;
+  },
+
   gap: 20,
   colors: ["#f5f5f5", "#e0e0e0", "#ebebeb", "#f0f0f0"],
   images: [Image1, Image2, Image3, Image4],
@@ -21,12 +27,23 @@ const CONFIG = {
 // Define props for Card component
 interface CardProps {
   index: number;
+  height: number;
 }
 
 // Styled components with proper typing
 const CarouselContainer = styled.div`
   width: 100%;
-  height: 400px;
+  height: 100%;
+  @media (max-width: 640px) {
+    height: 180px;
+  }
+  @media (min-width: 641px) and (max-width: 1023px) {
+    height: 280px;
+  }
+  @media (min-width: 1024px) {
+    height: 400px;
+  }
+
   position: relative;
   perspective: 1000px;
   overflow: hidden;
@@ -62,7 +79,8 @@ const Rail = styled.div<RailProps>`
 
 const Card = styled.div<CardProps>`
   width: 100%;
-  height: ${CONFIG.itemHeight}px;
+  aspect-ratio: 3 / 2;
+  height: ${(props) => props.height}px;
   margin-bottom: ${CONFIG.gap}px;
   background: ${(props) => CONFIG.colors[props.index % CONFIG.colors.length]};
   border-radius: 12px;
@@ -91,10 +109,20 @@ const DataList: React.FC = () => {
   );
   const requestRef = useRef<number>(null);
   const lastTimeRef = useRef<number>(0);
+  const [itemHeight, setItemHeight] = useState(CONFIG.getItemHeight());
+
+  useEffect(() => {
+    const handleResize = () => {
+      setItemHeight(CONFIG.getItemHeight());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const singleColumnHeight = useMemo(
-    () => (CONFIG.itemHeight + CONFIG.gap) * CONFIG.itemsPerColumn,
-    []
+    () => (itemHeight + CONFIG.gap) * CONFIG.itemsPerColumn,
+    [itemHeight]
   );
 
   const columnItems = useMemo(() => {
@@ -105,7 +133,11 @@ const DataList: React.FC = () => {
         for (let i = 0; i < CONFIG.itemsPerColumn; i++) {
           const imageIndex = (columnIndex + i) % CONFIG.images.length;
           items.push(
-            <Card key={`${columnIndex}-${set}-${i}`} index={i}>
+            <Card
+              key={`${columnIndex}-${set}-${i}`}
+              index={i}
+              height={itemHeight}
+            >
               <ProductImage
                 src={CONFIG.images[imageIndex]}
                 alt={`Product ${imageIndex + 1}`}
@@ -118,7 +150,7 @@ const DataList: React.FC = () => {
 
       return items;
     });
-  }, []);
+  }, [itemHeight]);
 
   const animate = (time: number) => {
     if (!lastTimeRef.current) lastTimeRef.current = time;
@@ -152,8 +184,8 @@ const DataList: React.FC = () => {
 
   return (
     <>
-      <div className="relative w-screen max-w-[1440px] mx-auto h-[400px] mt-32 overflow-hidden">
-        <div className="h-52 w-screen z-10 absolute top-0 left-0 bg-gradient-to-b from-black to-transparent"></div>
+      <div className="relative w-full max-w-[1440px] mx-auto h-[180px] sm:h-[250px] lg:h-[300px] xl:h-[400px] lg:mt-12 xl:mt-20 overflow-hidden">
+        <div className="h-52 w-full z-10 absolute -top-1 left-0 bg-gradient-to-b from-black to-transparent"></div>
         <div className="h-full w-32 z-10 absolute top-0 left-0 bg-gradient-to-r from-black to-transparent"></div>
         <CarouselContainer>
           <RailsContainer>
@@ -165,7 +197,7 @@ const DataList: React.FC = () => {
           </RailsContainer>
         </CarouselContainer>
         <div className="h-full w-32 z-10 absolute top-0 right-0 bg-gradient-to-l from-black to-transparent"></div>
-        <div className="h-52 w-screen z-10 absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent"></div>
+        <div className="h-52 w-screen z-10 absolute -bottom-1 left-0 bg-gradient-to-t from-black to-transparent"></div>
       </div>
     </>
   );

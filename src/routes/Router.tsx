@@ -6,6 +6,7 @@ import MainLayout from "../screens/MainLayout";
 import BlogsPage from "../pages/BlogsPage";
 import ContactPage from "../pages/ContactPage";
 import ServicesPage from "../pages/ServicesPage";
+import BlogDetails from "../components/blogs/blog/BlogDetails";
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
 
         {/* Blog's In Page Navigation */}
         <Route path="/blogs/:category" element={<BlogsPage />} />
+        <Route path="/blog/:slug" element={<BlogDetails />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -1,6 +1,5 @@
 import { Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useRef, useEffect } from "react";
-// import TimeAndLocation from "../../animations/TimeAndLocation";
 
 interface Particle {
   element: HTMLDivElement;
@@ -86,145 +85,146 @@ const HeroAbout = () => {
       });
     };
   }, []);
+
   return (
-    <>
-      <div className="relative top-0 left-0 w-full max-w-[1440px] max-h-[810px] mx-auto h-screen border-b-[1px] border-lime-400/15 overflow-hidden">
-        {/* Video Background */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute top-0 left-0 min-w-full h-auto saturate-[150%] object-cover"
+    <div className="relative w-full max-w-[1440px] mx-auto h-screen min-h-[600px] border-b-[1px] border-lime-400/15 overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover saturate-[150%]"
+      >
+        <source
+          src="https://previews.customer.envatousercontent.com/h264-video-previews/ddf9b296-d5d2-409f-9936-6aa3b6ab453e/56897660.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Dark overlay for better text visibility */}
+      <div className="absolute inset-0 bg-black/80"></div>
+
+      {/* Location */}
+      <div className="absolute top-36 sm:top-32 left-4 sm:left-8 md:left-12 lg:left-28">
+        <a
+          href="https://maps.app.goo.gl/K6117GXDuHQJfSCr8"
+          target="blank"
+          className="group text-sm sm:text-[17px] text-white/50 text-start flex justify-start items-center leading-5"
         >
-          <source
-            src={
-              "https://previews.customer.envatousercontent.com/h264-video-previews/ddf9b296-d5d2-409f-9936-6aa3b6ab453e/56897660.mp4"
-            }
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
+          <p className="w-2 h-2 bg-lime-500 rounded-full mr-2" />
+          Tiruchengodu, Tamil nadu, India.
+        </a>
+      </div>
 
-        {/* Dark overlay for better text visibility */}
-        <div className="absolute inset-0 bg-black/80"></div>
-
-        <div className="absolute top-40 left-28">
-          <a
-            href="https://maps.app.goo.gl/K6117GXDuHQJfSCr8"
-            target="blank"
-            className="group text-[17px] text-white/50 text-start flex justify-start items-center leading-5"
-          >
-            {/* <TimeAndLocation /> */}
-            <p className="w-2 h-2 bg-lime-500 rounded-full mr-2" />{" "}
-            Tiruchengodu, Tamil nadu, India.
-          </a>
-          {/* <p className="text-[17px] text-white/50 text-start leading-5">
-          zenthinktechnologies<b className="font-sans">@</b>gmail.com
-        </p> */}
+      {/* Content overlay */}
+      <div className="absolute top-1/2 left-1/2 md:right-1/4 -translate-x-1/2 md:translate-x-1/3 -translate-y-1/2 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[470px] h-auto max-h-[80vh] p-4 sm:p-6 rounded-xl sm:rounded-[25px] bg-gradient-to-tr from-white/5 to-white/0 backdrop-blur-sm bg-opacity-5 shadow-[0_0_20px_0px_#000000,inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)] flex flex-col items-start justify-between text-start space-y-4 sm:space-y-6">
+        <div className="space-y-2 sm:space-y-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black text-white text-start leading-tight sm:leading-[52px]">
+            We make your plans to digital platform
+          </h1>
+          <p className="text-sm sm:text-[17px] text-white/50 text-start leading-5 sm:leading-6">
+            We're dedicated to delivering innovative solutions that transform
+            businesses and create lasting impact.
+          </p>
         </div>
-
-        {/* Content overlay */}
-        <div className="absolute top-56 right-40 w-[470px] h-[280px] rounded-[25px] bg-gradient-to-tr from-white/5 to-white/0 backdrop-blur-sm bg-opacity-5 shadow-[0_0_20px_0px_#000000,inset_0_-5px_5px_rgba(255,255,255,0.025),_inset_0_1px_2px_rgba(255,255,255,0.4)] flex flex-col items-start justify-between text-start p-6">
-          <span className="">
-            <h1 className="text-[50px] font-black text-white text-start mb-2 leading-[52px]">
-              We make your plans to digital platform
-            </h1>
-            <p className="text-[17px] text-white/50 text-start leading-5">
-              We're dedicated to delivering innovative solutions that transform
-              businesses and create lasting impact.
-            </p>
-          </span>
-          <button
-            ref={buttonRef}
+        <button
+          ref={buttonRef}
+          className="
+            relative px-6 h-10 sm:h-[48px] bg-lime-500 text-white font-extrabold 
+            rounded-full border-2 border-lime-400
+            transition-all duration-300 ease-linear
+            [box-shadow:inset_2px_2px_4px_0_rgba(0,0,0,0.1),inset_-2px_-2px_4px_0_rgba(255,255,255,0.2)]
+            hover:[box-shadow:inset_3px_3px_6px_0_rgba(0,0,0,0.2),inset_-3px_-3px_6px_0_rgba(255,255,255,0.3)]
+            hover:bg-lime-500/90 active:scale-95
+            after:absolute after:bottom-1 after:left-1/2 
+            after:-translate-x-1/2 after:w-3 after:h-3
+            after:rounded-full
+            overflow-hidden
+            text-sm sm:text-base
+          "
+        >
+          View Works
+          {/* Spark elements */}
+          <span
             className="
-              relative px-6 h-[48px] bg-lime-500 text-white font-extrabold 
-              rounded-full border-2 border-lime-400
-              transition-all duration-300 ease-linear
-              [box-shadow:inset_2px_2px_4px_0_rgba(0,0,0,0.1),inset_-2px_-2px_4px_0_rgba(255,255,255,0.2)]
-              hover:[box-shadow:inset_3px_3px_6px_0_rgba(0,0,0,0.2),inset_-3px_-3px_6px_0_rgba(255,255,255,0.3)]
-              hover:bg-lime-500/90 active:scale-95
-              after:absolute after:bottom-1 after:left-1/2 
-              after:-translate-x-1/2 after:w-3 after:h-3
-              after:rounded-full
-              overflow-hidden
+              absolute inset-0 w-full mx-auto
+              before:absolute before:left-8 before:top-2 before:w-1 before:h-1 
+              before:bg-lime-200 before:rounded-full before:opacity-0
+              before:hover:opacity-100 before:hover:animate-spark-x
+              after:absolute after:right-8 after:bottom-2 after:w-1 after:h-1 
+              after:bg-lime-200 after:rounded-full after:opacity-0
+              after:hover:opacity-100 after:hover:animate-spark-x-reverse
             "
-          >
-            View Works
-            {/* Spark elements */}
-            <span
-              className="
-                absolute inset-0 w-full mx-auto
-                before:absolute before:left-8 before:top-2 before:w-1 before:h-1 
-                before:bg-lime-200 before:rounded-full before:opacity-0
-                before:hover:opacity-100 before:hover:animate-spark-x
-                after:absolute after:right-8 after:bottom-2 after:w-1 after:h-1 
-                after:bg-lime-200 after:rounded-full after:opacity-0
-                after:hover:opacity-100 after:hover:animate-spark-x-reverse
-              "
-            ></span>
-          </button>
-        </div>
+          ></span>
+        </button>
+      </div>
 
-        {/* Social Links */}
-        <div className="absolute top-[580px] left-28">
-          <span className="flex space-x-2.5 mb-5">
+      {/* Social Links */}
+      <div className="absolute bottom-8 sm:bottom-12 left-4 sm:left-8 md:left-12 lg:left-28">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+          <div className="flex space-x-2 sm:space-x-2.5">
             <a
+              title="/"
               href="/"
-              className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
+                `,
               }}
             >
-              <Twitter className="w-5 h-5 text-lime-400" />
+              <Twitter className="w-4 h-4 sm:w-5 sm:h-5 text-lime-400" />
             </a>
             <a
+              title="/"
               href="/"
-              className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
+                `,
               }}
             >
-              <Facebook className="w-5 h-5 text-lime-400" />
+              <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-lime-400" />
             </a>
             <a
+              title="/"
               href="/"
-              className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
+                `,
               }}
             >
-              <Instagram className="w-5 h-5 text-lime-400" />
+              <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-lime-400" />
             </a>
             <a
+              title="/"
               href="/"
-              className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center hover:scale-[1.2] transition-all duration-500 ease-in-out"
               style={{
                 boxShadow: `
-    inset 0 -5px 5px rgba(255, 255, 255, 0.025),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
-  `,
+                  inset 0 -5px 5px rgba(255, 255, 255, 0.025),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.4)
+                `,
               }}
             >
-              <Linkedin className="w-5 h-5 text-lime-400" />
+              <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-lime-400" />
             </a>
-          </span>
-          <p className="w-[330px] text-[17px] text-white/50 text-start leading-[21px]">
+          </div>
+          <p className="w-full max-w-[330px] text-sm sm:text-[17px] text-white/50 text-start leading-5 sm:leading-[21px]">
             We're dedicated to delivering innovative solutions that transform
             businesses and create lasting impact.
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
