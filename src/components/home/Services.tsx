@@ -10,9 +10,9 @@ const Services = () => {
         className="w-full max-w-[1440px] mx-auto h-auto py-10 md:py-12 lg:py-14"
       >
         <h1 className="text-center text-[30px] md:text-[35px] lg:text-[40px] font-black leading-tight mb-10 md:mb-8 lg:mb-12">
-          Key Features to Elevate
+          Driving Digital Evolution:
           <br />
-          Your Business
+          Our Core Services:
         </h1>
 
         <div className="w-full md:w-[720px] lg:w-full xl:w-[1220px] mx-auto flex flex-col md:flex-row justify-start md:justify-between items-center space-y-32 md:space-y-0 md:space-x-3 lg:space-x-6 px-6 lg:px-20 xl:px-0 pb-20 md:pb-36">

@@ -98,3 +98,4 @@ cypress/videos/
 
 # Jest
 jest-cache/
+node_modules
