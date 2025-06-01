@@ -18,26 +18,26 @@ const Feedback = () => {
     {
       id: 1,
       quote:
-        "The ERP solution transformed our operations, making everything more efficient and transparent. Our team is now more productive than ever",
-      author: "Michael Smith",
+        "I knew fresh seafood, not websites. Had this simple idea: sell my daily catch directly to customers online. They built me a platform where customers can see what fish I caught today, place orders, and get it delivered fresh. Sales jumped from $3K to $25K monthly in just 4 months. Now I'm expanding to three more boats!",
+      author: "Monishwaran - Coreverse",
       image: People1,
-      position: "Operations Director",
+      position: "Founder & CEO",
     },
     {
       id: 2,
       quote:
-        "The integration process was seamless, and the support team was incredibly helpful. This software has truly streamlined our workflows.",
-      author: "Sarah Brown",
+        "Turned my underground music passion into a streaming empire Had zero coding knowledge but wanted to create a platform for underground artists that Spotify ignores. They transformed my messy idea into a sleek music app with custom playlists, artist profiles, and seamless streaming. Hit 50K downloads in 2 months and now generating $8K monthly from subscriptions. Underground artists finally have their stage!",
+      author: "Pradeep - Enreach",
       image: People2,
-      position: "CFO",
+      position: "Founder & CEO",
     },
     {
       id: 3,
       quote:
-        "We've seen significant improvements in our reporting and analytics since implementing this ERP system. Highly recommended",
-      author: "Emily Johnson",
+        "From frustrated parent to successful entrepreneur Tired of driving to playgrounds only to find them overcrowded or closed for maintenance. My idea was simple: let parents book playground time slots for their kids. They created an intuitive app where parents can reserve spots, see real-time availability, and even organize playdates. Now managing 45 playgrounds across the city with 2,000+ active families!",
+      author: "Maria Santos - PlayTime Connect",
       image: People3,
-      position: "IT Manager",
+      position: "Founder & CEO",
     },
   ];
 

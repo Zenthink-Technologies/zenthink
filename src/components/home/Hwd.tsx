@@ -60,9 +60,9 @@ const Hwd = () => {
         className="w-full max-w-[1440px] mx-auto h-[210px] md:h-[350px] lg:h-[450px] xl:h-[550px] relative py-10 md:py-12 lg:py-14"
       >
         <h1 className="text-center text-[20px] md:text-[30px] lg:text-[35px] xl:text-[40px] font-black leading-tight text-white">
-          Streamline processes with
+          From Concept to Code
           <br />
-          smart integrations
+          Our Proven Process
         </h1>
 
         <div

@@ -10,7 +10,7 @@ const LogoSlider = () => {
         className="w-screen max-w-[1440px] mx-auto py-10 md:py-12 lg:py-14"
       >
         <h1 className="text-center text-[20px] md:text-[25px] lg:text-[30px] font-bold leading-7 md:leading-8 lg:leading-9 w-[250px] md:w-[300px] lg:w-[400px] mx-auto">
-          Empowering businesses with reliable ERP
+          Strategic Alliances for Digital Transformation
         </h1>
         <div className="flex justify-center items-center relative">
           <ClientLogosReverse />

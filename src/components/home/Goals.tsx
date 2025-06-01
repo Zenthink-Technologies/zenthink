@@ -14,9 +14,9 @@ const Goals = () => {
         className="w-full max-w-[1440px] mx-auto h-auto py-10 md:py-12 lg:py-14"
       >
         <h1 className="text-center text-[30px] md:text-[40px] lg:text-[50px] font-black leading-[30px] md:leading-[40px] lg:leading-[50px] mb-8 md:mb-12">
-          Key Features to Elevate
+          Built on Purpose,
           <br />
-          Your Business
+          Driven by Excellence
         </h1>
 
         <div className="relative w-full xl:w-[1280px] flex justify-between items-center mx-auto px-8 md:px-24">
@@ -64,11 +64,11 @@ const Goals = () => {
                   {/* Text */}
                   <span className="flex flex-col justify-end items-center text-center space-y-2">
                     <h1 className="md:text-[13px] lg:text-[19px] xl:text-[22px] font-black">
-                      Define Objectives
+                      Our Purpose
                     </h1>
                     <p className="mt-2 md:text-[10px] lg:text-[15px] xl:text-[19px] md:leading-0 lg:leading-5 xl:leading-6 opacity-70">
-                      Augue maecenas pharetra tempus congue dictum nunc
-                      consequat phasellus orci.
+                      To empower visionary ideas by transforming abstract
+                      ambition into purposeful digital realities.
                     </p>
                   </span>
                 </span>
@@ -97,11 +97,11 @@ const Goals = () => {
                   {/* Text */}
                   <span className="flex flex-col justify-end items-center text-center space-y-2">
                     <h1 className="md:text-[13px] lg:text-[19px] xl:text-[22px] font-black">
-                      Gather Requirements
+                      Our Intention
                     </h1>
                     <p className="mt-2 md:text-[10px] lg:text-[15px] xl:text-[19px] md:leading-0 lg:leading-5 xl:leading-6 opacity-70">
-                      Sit mattis pellentesque in amet sit. Arcu tortor venenatis
-                      libero pellentesque fringilla natoque.
+                      We craft every solution with deliberate design, technical
+                      precision, and user-centric thinking.
                     </p>
                   </span>
                 </span>
@@ -130,11 +130,11 @@ const Goals = () => {
                   {/* Text */}
                   <span className="flex flex-col justify-end items-center text-center space-y-2">
                     <h1 className="md:text-[13px] lg:text-[19px] xl:text-[22px] font-black">
-                      Design Solution
+                      Our Execution
                     </h1>
                     <p className="mt-2 md:text-[10px] lg:text-[15px] xl:text-[19px] md:leading-0 lg:leading-5 xl:leading-6 opacity-70">
-                      Ut nisl purus cras et elit. Adipiscing diam vel feugiat a
-                      vestibulum elementum imperdiet.
+                      We deliver scalable, lasting digital outcomes that convert
+                      innovation into measurable impact.
                     </p>
                   </span>
                 </span>
