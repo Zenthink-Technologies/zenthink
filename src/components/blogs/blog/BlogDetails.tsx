@@ -243,7 +243,7 @@ const BlogDetails = () => {
             </div>
           </div>
         </div>
-        {blog && (
+        {blog.category && (
           <RelatedBlogs currentBlogId={blog.id} category={blog.category} />
         )}
       </div>

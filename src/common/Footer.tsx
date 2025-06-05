@@ -9,9 +9,8 @@ const Footer = () => {
           {/* Main text with social icons */}
           <div className="flex flex-col justify-start items-start mb-8 lg:mb-12 w-full lg:w-auto">
             <p className="text-[18px] lg:text-[19px] xl:text-[22px] font-medium max-w-full lg:max-w-[400px] xl:max-w-[450px] mb-6 lg:mb-0">
-              We bridge the extraordinary gap between imagination and
-              implementation, crafting bespoke digital experiences that
-              transcend expectations and deliver measurable excellence.
+              We bridge the gap between imagination and implementation, crafting
+              bespoke digital experiences and delivering measurable excellence.
             </p>
 
             {/* Social Icons with Circle Background */}
