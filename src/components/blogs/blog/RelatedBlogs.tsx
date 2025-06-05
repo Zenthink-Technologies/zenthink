@@ -3,12 +3,20 @@ import { slugify } from "../../../utils/slugify";
 import { blogData } from "../../../data/blogData";
 
 interface RelatedBlogsProps {
-  currentBlogId: string;
+  currentBlogId?: string;
   category: string;
 }
 
 const RelatedBlogs = ({ currentBlogId, category }: RelatedBlogsProps) => {
   const navigate = useNavigate();
+
+  const relatedBlogs = category
+    ? blogData.filter(
+        (blog) => blog.id !== currentBlogId && blog.category === category
+      )
+    : [];
+
+  if (relatedBlogs.length === 0) return null;
 
   const sameCategoryBlogs = blogData.filter(
     (blog) => blog.category === category && blog.id !== currentBlogId

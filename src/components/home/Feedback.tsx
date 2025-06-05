@@ -18,7 +18,7 @@ const Feedback = () => {
     {
       id: 1,
       quote:
-        "I knew fresh seafood, not websites. Had this simple idea: sell my daily catch directly to customers online. They built me a platform where customers can see what fish I caught today, place orders, and get it delivered fresh. Sales jumped from $3K to $25K monthly in just 4 months. Now I'm expanding to three more boats!",
+        "I knew fresh seafood, not websites — but they created a platform that helped me turn my seafood business idea into reality ",
       author: "Monishwaran - Coreverse",
       image: People1,
       position: "Founder & CEO",
@@ -26,7 +26,7 @@ const Feedback = () => {
     {
       id: 2,
       quote:
-        "Turned my underground music passion into a streaming empire Had zero coding knowledge but wanted to create a platform for underground artists that Spotify ignores. They transformed my messy idea into a sleek music app with custom playlists, artist profiles, and seamless streaming. Hit 50K downloads in 2 months and now generating $8K monthly from subscriptions. Underground artists finally have their stage!",
+        "ZenThink Technologies Team Turned my underground music passion into a streaming empire",
       author: "Pradeep - Enreach",
       image: People2,
       position: "Founder & CEO",

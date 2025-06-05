@@ -1,7 +1,7 @@
 import Blog1 from "../assets/blogs/blog1.png";
 import Blog2 from "../assets/blogs/blog2.png";
 import Blog3 from "../assets/blogs/blog3.png";
-import { Blog } from "./blogType";
+import { Blog } from "../types/blogType";
 
 export const blogData: Blog[] = [
   {
