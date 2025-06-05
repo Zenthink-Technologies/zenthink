@@ -34,7 +34,7 @@ const Feedback = () => {
     {
       id: 3,
       quote:
-        "From frustrated parent to successful entrepreneur Tired of driving to playgrounds only to find them overcrowded or closed for maintenance. My idea was simple: let parents book playground time slots for their kids. They created an intuitive app where parents can reserve spots, see real-time availability, and even organize playdates. Now managing 45 playgrounds across the city with 2,000+ active families!",
+        "My idea was simple — let parents book playground time. They turned it into an easy-to-use app with real-time booking and playdate planning.",
       author: "Maria Santos - PlayTime Connect",
       image: People3,
       position: "Founder & CEO",
