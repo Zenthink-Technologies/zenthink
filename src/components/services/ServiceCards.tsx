@@ -8,16 +8,10 @@ import Service3 from "../../assets/services/service3.webp";
 type FilmContent = {
   id: number;
   image: string;
-  year: string;
-  award: string;
-  ratings: {
-    stars: string;
-    quote: string;
-    source: string;
-  }[];
-  category: string;
+  quote: string;
+  points: string[];
   title: string;
-  director: string;
+  description: string;
 };
 
 const ServiceCards = () => {
@@ -25,65 +19,42 @@ const ServiceCards = () => {
     {
       id: 1,
       image: Service1,
-      year: "2024",
-      award: "Berlin Independent Cinema Prize",
-      ratings: [
-        {
-          stars: "★★★★★",
-          quote: "Raw, immediate, unforgettable.",
-          source: "Film Comment",
-        },
-        {
-          stars: "★★★★★",
-          quote: "Framehaus at its most visceral.",
-          source: "Sight & Sound",
-        },
+      quote:
+        "We build apps that are user-friendly and designed to elevate from day one.",
+      points: [
+        "Cross-platform apps (Android & iOS)",
+        "Modern, intuitive UI/UX",
+        "Fast, secure, and scalable",
       ],
-      category: "Short Film",
-      title: "FEVER\nCOAST",
-      director: "Akira Nomura",
+      title: "Mobile App\nDevelopment",
+      description: "Put your business in your customer’s pocket.",
     },
     {
       id: 2,
       image: Service2,
-      year: "2024",
-      award: "Berlin Independent Cinema Prize",
-      ratings: [
-        {
-          stars: "★★★★★",
-          quote: "Raw, immediate, unforgettable.",
-          source: "Film Comment",
-        },
-        {
-          stars: "★★★★★",
-          quote: "Framehaus at its most visceral.",
-          source: "Sight & Sound",
-        },
+      quote:
+        "We tailor web apps to fit your business — not the other way around.",
+      points: [
+        "Powerful dashboards & Management systems",
+        "Responsive design",
+        "Custom workflows, secure access",
       ],
-      category: "Short Film",
-      title: "FEVER\nCOAST",
-      director: "Akira Nomura",
+      title: "⁠Web Application\nDevelopment",
+      description: "Simplify, streamline, and scale — all in one platform.",
     },
     {
       id: 3,
       image: Service3,
-      year: "2024",
-      award: "Berlin Independent Cinema Prize",
-      ratings: [
-        {
-          stars: "★★★★★",
-          quote: "Raw, immediate, unforgettable.",
-          source: "Film Comment",
-        },
-        {
-          stars: "★★★★★",
-          quote: "Framehaus at its most visceral.",
-          source: "Sight & Sound",
-        },
+      quote:
+        "Say goodbye to generic software. Our custom solutions drive business growth.",
+      points: [
+        "⁠ERP & CRM systems",
+        "⁠Custom websites",
+        "HRMS, sales tracking, inventory etc.",
+        "Dashboards, automation, and reporting",
       ],
-      category: "Short Film",
-      title: "FEVER\nCOAST",
-      director: "Akira Nomura",
+      title: "Custom Business\nSolutions",
+      description: "Tools that work like your team does.",
     },
   ];
 
@@ -175,41 +146,33 @@ const FilmContainer = ({
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-0">
             <div>
               <p className="text-xs xs:text-sm sm:text-base md:text-[17px] font-light tracking-wide text-white">
-                <b className="font-sans text-[10px] xs:text-xs sm:text-sm">
-                  {film.year}
-                </b>{" "}
-                <span className="mx-2">|</span> {film.award}
+                {film.quote}
               </p>
             </div>
 
             <div className="space-y-3 xs:space-y-4 sm:space-y-6 text-right w-full">
-              {film.ratings.map((rating, index) => (
-                <div key={index}>
-                  <p className="text-sm xs:text-base sm:text-lg font-semibold text-white">
-                    {rating.stars}
-                  </p>
-                  <p className="text-xs xs:text-sm sm:text-base md:text-lg font-semibold text-white">
-                    {rating.quote}
-                  </p>
-                  <p className="text-[10px] xs:text-xs sm:text-sm uppercase tracking-widest text-gray-300">
-                    {rating.source}
-                  </p>
-                </div>
-              ))}
+              <ul className="space-y-2">
+                {film.points.map((point, index) => (
+                  <li
+                    key={index}
+                    className="text-sm xs:text-base sm:text-lg text-white text-end flex justify-end items-center"
+                  >
+                    <p className="w-1.5 h-1.5 bg-lime-500/50 backdrop-blur-sm rounded-full mr-2" />{" "}
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
           {/* Bottom Content */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 xs:gap-6 sm:gap-0">
             <div>
-              <p className="uppercase text-xs xs:text-sm sm:text-base md:text-lg tracking-widest mb-1 xs:mb-2 text-white">
-                {film.category}
-              </p>
               <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white whitespace-pre-line">
                 {film.title}
               </h1>
               <p className="text-[10px] xs:text-xs sm:text-sm mt-1 xs:mt-2 text-white">
-                Director: {film.director}
+                {film.description}
               </p>
             </div>
 
