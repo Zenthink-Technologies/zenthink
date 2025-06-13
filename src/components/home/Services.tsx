@@ -6,7 +6,7 @@ const Services = () => {
   return (
     <>
       <div
-        id="services"
+        id="service"
         className="w-full max-w-[1440px] mx-auto h-auto py-10 md:py-12 lg:py-14"
       >
         <h1 className="text-center text-[30px] md:text-[35px] lg:text-[40px] font-black leading-tight mb-10 md:mb-8 lg:mb-12">
