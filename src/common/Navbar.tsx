@@ -40,6 +40,13 @@ const Navbar = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showZenSparkMain, setShowZenSparkMain] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [location.pathname]);
+
   const toggleMenu = () => {
     setShowZenSpark(false);
     setIsOpen((prev) => !prev);

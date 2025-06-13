@@ -13,11 +13,11 @@ const HeroServices = () => {
         <h1 className="-mt-10 md:hidden text-[60px] md:text-[100px] lg:text-[120px] xl:text-[170px] lg:mt-0 text-center font-black uppercase tracking-widest bg-gradient-to-b from-white/15 to-transparent bg-clip-text text-transparent">
           Services
         </h1>
-        <div className="relative h-[30px] lg:h-[35px] xl:h-[40px] -mt-9 md:-mt-10 lg:-mt-16 xl:-mt-24 w-[100px] lg:w-[130px] xl:w-[150px] rounded-[50px] overflow-hidden bg-neutral-900">
+        <div className="relative h-[30px] lg:h-[35px] xl:h-[40px] -mt-9 md:-mt-10 lg:-mt-16 xl:-mt-24 w-[120px] lg:w-[130px] xl:w-[150px] rounded-[50px] overflow-hidden bg-neutral-900">
           <div className="glow-effect clockwise"></div>
           <div className="glow-effect counter-clockwise"></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-white text-[11px] md:text-[12px] lg:text-[15px] xl:text-[19px] font-black z-10">
+            <span className="text-white text-[14px] md:text-[12px] lg:text-[15px] xl:text-[19px] font-black z-10">
               Case Studies
             </span>
           </div>

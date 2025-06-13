@@ -217,7 +217,7 @@ const BlogDetails = () => {
                   <p className="text-xl sm:text-2xl lg:text-[30px] xl:text-[40px] font-black mb-2">
                     Introduction
                   </p>
-                  <p className="text-[13px] sm:text-[15px] text-gray-600 mb-6 sm:mb-8">
+                  <p className="text-[13px] sm:text-[15px] text-gray-400 mb-6 sm:mb-8">
                     {blog.introduction}
                   </p>
                 </>
@@ -259,7 +259,7 @@ const BlogDetails = () => {
                             />
                           </div>
                           {section.text && (
-                            <p className="text-xs sm:text-sm text-gray-500 mt-2 text-center">
+                            <p className="text-xs sm:text-sm text-neutral-100 mt-2 text-center">
                               {section.text}
                             </p>
                           )}
@@ -270,7 +270,7 @@ const BlogDetails = () => {
                       return (
                         <p
                           key={index}
-                          className="mb-4 sm:mb-6 text-gray-700 leading-relaxed text-[13px] sm:text-[15px]"
+                          className="mb-4 sm:mb-6 text-gray-400 leading-relaxed text-[13px] sm:text-[15px]"
                         >
                           {section.text}
                         </p>
