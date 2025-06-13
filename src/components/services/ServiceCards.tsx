@@ -155,9 +155,9 @@ const FilmContainer = ({
                 {film.points.map((point, index) => (
                   <li
                     key={index}
-                    className="text-sm xs:text-base sm:text-lg text-white text-end flex justify-end items-center"
+                    className="text-sm xs:text-base sm:text-lg text-white text-wrap text-end flex justify-end items-start"
                   >
-                    <p className="w-1.5 h-1.5 bg-lime-500/50 backdrop-blur-sm rounded-full mr-2" />{" "}
+                    <p className="w-1.5 h-1.5 bg-lime-500/50 backdrop-blur-sm rounded-full mr-2 mt-1.5" />{" "}
                     {point}
                   </li>
                 ))}
