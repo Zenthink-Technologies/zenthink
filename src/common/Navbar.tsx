@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { X } from "lucide-react";
 import Triangle from "../assets/triangle.svg";
@@ -25,6 +25,7 @@ interface TabContent {
 }
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [, setIsHovered] = useState(isSmallScreen);
   const [isOpen, setIsOpen] = useState(false);
@@ -126,7 +127,7 @@ const Navbar = () => {
       description: "Discover our innovative solutions for your business needs",
       features: [
         { name: "Clients", path: "#clients" },
-        { name: "Services", path: "#services" },
+        { name: "Services", path: "#service" },
         { name: "How we do", path: "#how_we_do" },
         { name: "Goals", path: "#goals" },
         { name: "Feedback", path: "#feedback" },
@@ -249,6 +250,19 @@ const Navbar = () => {
         setHoveredTab(null);
       }, 100);
     }
+  };
+
+  // Handle navigation state cleanup
+  const handleNavigation = () => {
+    setIsOpen(false);
+    setIsExpanded(false);
+    setHoveredTab(null);
+  };
+
+  // Handle feature link navigation
+  const handleFeatureNavigation = (path: string) => {
+    handleNavigation();
+    navigate(path);
   };
 
   // Particle effect
@@ -394,11 +408,7 @@ const Navbar = () => {
                       }`}
                     onMouseEnter={() => handleTabEnter(key)}
                     onMouseLeave={handleTabLeave}
-                    onClick={() => {
-                      setIsOpen(false);
-                      setIsExpanded(false);
-                      setHoveredTab(null);
-                    }}
+                    onClick={handleNavigation}
                   >
                     <span className="text-white text-[15px] font-semibold relative z-10">
                       {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -427,26 +437,15 @@ const Navbar = () => {
                       <ul className="flex justify-start items-start flex-wrap gap-y-0.5 gap-x-10">
                         {displayContent.features.map((feature, index) => (
                           <li key={index}>
-                            <Link
-                              to={feature.path}
-                              className="group flex items-center text-[15px] text-white hover:text-lime-500 transition-colors duration-200"
-                              onClick={(e) => {
-                                if (feature.path.startsWith("#")) {
-                                  e.preventDefault();
-                                  const element = document.querySelector(
-                                    feature.path
-                                  );
-                                  if (element) {
-                                    element.scrollIntoView({
-                                      behavior: "smooth",
-                                    });
-                                  }
-                                }
-                              }}
+                            <button
+                              onClick={() =>
+                                handleFeatureNavigation(feature.path)
+                              }
+                              className="group flex items-center text-[15px] text-white hover:text-lime-500 transition-colors duration-200 cursor-pointer bg-transparent border-none p-0"
                             >
                               <span className="w-2 h-2 bg-lime-500 group-hover:bg-white rounded-full mr-2" />
                               {feature.name}
-                            </Link>
+                            </button>
                           </li>
                         ))}
                       </ul>
@@ -493,7 +492,7 @@ const Navbar = () => {
             }`}
           >
             <div
-              className={`relative transition-all ease-in-out overflow-y-auto h-full min-w-[250px] w-[65vw] pt-9 pb-10 rounded-l-[24px] duration-700 bg-gradient-to-tr from-black/70 to-white/0 backdrop-blur-lg bg-opacity-5 shadow-[0_0_20px_0_#000000,inset_0_-5px_5px_rgba(255,255,255,0.1),_inset_0_1px_2px_rgba(255,255,255,0.2)]`}
+              className={`relative transition-all ease-in-out overflow-y-auto h-full min-w-[205px] w-[65vw] pt-9 pb-10 rounded-l-[24px] duration-700 bg-gradient-to-tr from-black/70 to-white/0 backdrop-blur-lg bg-opacity-5 shadow-[0_0_20px_0_#000000,inset_0_-5px_5px_rgba(255,255,255,0.1),_inset_0_1px_2px_rgba(255,255,255,0.2)]`}
               onMouseEnter={handleTabsEnter}
               onMouseLeave={() =>
                 !showZenSpark && !isSmallScreen && setIsHovered(false)
@@ -548,11 +547,7 @@ const Navbar = () => {
                       }`}
                     onMouseEnter={() => handleTabEnter(key)}
                     onMouseLeave={handleTabLeave}
-                    onClick={() => {
-                      setIsOpen(false);
-                      setIsExpanded(false);
-                      setHoveredTab(null);
-                    }}
+                    onClick={handleNavigation}
                   >
                     <span className="text-white text-[15px] font-semibold relative z-10">
                       {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -581,26 +576,15 @@ const Navbar = () => {
                       <ul className="flex flex-col justify-start items-start flex-wrap gap-y-0.5 gap-x-10">
                         {displayContent.features.map((feature, index) => (
                           <li key={index}>
-                            <Link
-                              to={feature.path}
-                              className="group flex justify-start text-nowrap items-center text-[14px] text-white hover:text-lime-500 transition-colors duration-200"
-                              onClick={(e) => {
-                                if (feature.path.startsWith("#")) {
-                                  e.preventDefault();
-                                  const element = document.querySelector(
-                                    feature.path
-                                  );
-                                  if (element) {
-                                    element.scrollIntoView({
-                                      behavior: "smooth",
-                                    });
-                                  }
-                                }
-                              }}
+                            <button
+                              onClick={() =>
+                                handleFeatureNavigation(feature.path)
+                              }
+                              className="group flex justify-start text-nowrap items-center text-[14px] text-white hover:text-lime-500 transition-colors duration-200 cursor-pointer bg-transparent border-none p-0"
                             >
                               <span className="w-2 h-2 bg-lime-500 group-hover:bg-white rounded-full mr-2" />
                               {feature.name}
-                            </Link>
+                            </button>
                           </li>
                         ))}
                       </ul>
