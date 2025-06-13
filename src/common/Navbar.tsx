@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { X } from "lucide-react";
 import Triangle from "../assets/triangle.svg";
+import Logo from "../assets/favicon.svg";
 
 interface Particle {
   element: HTMLDivElement;
@@ -23,6 +24,7 @@ interface TabContent {
 }
 
 const Navbar = () => {
+  const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -511,10 +513,7 @@ const Navbar = () => {
           {/* Hero Button */}
           <div
             className="
-              hover:h-[175px]
-              hover:scale-[1.02]
-              hover:translate-y-[2px]
-              hidden lg:flex flex-col justify-start items-center gap-y-3
+              hidden cursor-pointer lg:flex flex-col justify-start items-center gap-y-3
               scale-1 md:scale-[0.8] lg:scale-[0.9] xl:scale-[1]
               shadow-[0_0_20px_0px_#000000] lg:w-[130px] xl:w-[150px]
               relative px-4 xl:px-0 h-[48px] bg-lime-500 text-white font-extrabold 
@@ -528,6 +527,8 @@ const Navbar = () => {
               after:rounded-full
               overflow-hidden
             "
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             <span className="z-10 mt-2.5">Our ZenSpart</span>
 
@@ -543,14 +544,60 @@ const Navbar = () => {
                 after:hover:opacity-100 after:hover:animate-spark-x-reverse
               "
             ></span>
-
-            <div className="bg-black/20 rounded-lg py-4 px-2 text-justify text-[13px] leading-4">
-              Our ZenSpark is the love behind every line we write — a spark of
-              purpose, passion, and care that drives everything we create.
-            </div>
           </div>
         </div>
       </nav>
+
+      <div
+        className={`w-screen h-screen flex justify-center items-center cursor-pointer fixed top-0 -z-10 transition-all duration-700 ease-in-out ${
+          isHovered ? "opacity-100 scale-[1]" : "opacity-0 scale-[0.9]"
+        }`}
+      >
+        <div className="relative w-[80vw] md:w-[900px] md:scale-[0.7] lg:scale-[0.8] xl:scale-[1] bg-lime-500 shadow-[0_0_200px_0px_rgba(26,46,5,0.5)] overflow-hidden mx-auto rounded-lg h-[300px] flex flex-col md:flex-row transform transition-all">
+          <h1 className="text-white/10 text-[100px] md:text-[410px] -mt-[168px] font-sans font-bold">
+            SPARK
+          </h1>
+          {/* Content */}
+          <div className="absolute overflow-hidden pl-10 pr-10 md:pr-0 md:pl-[400px] w-full h-full bottom-0 right-0 bg-black/20 rounded-lg flex flex-col justify-center items-left">
+            <span className="absolute -top-48 -left-10 md:left-0 w-[350px] h-[350px] rounded-full bg-gradient-to-b from-black via-black to-black/30"></span>
+            <span className="hidden md:block md:w-[250px] absolute left-10 md:left-16 top-10 md:top-auto shadow-[0_0_20px_0px_#000000] rounded-full">
+              <img src={Logo} className="w-full h-auto scale-[1.01]" alt="" />
+            </span>
+            <p className="text-[80px] md:text-[100px] font-black text-white z-10 mb-8 leading-8">
+              ZenSpark
+            </p>
+            <p className="text-[14px] md:text-[18px] font-black text-white/70 mb-14 z-20 leading-4 md:leading-6">
+              Our ZenSpark is the love behind every line we write — a spark of
+              purpose, passion, and care that drives everything we create.
+            </p>
+          </div>
+
+          {/* Name */}
+          <div className="absolute bottom-10 right-8 flex justify-center items-start">
+            <p className="z-10 text-[22px] font-black text-white/20 mt-10">
+              Let's Think!
+            </p>
+            <span className="absolute w-[250px] h-[250px] rounded-full bg-gradient-to-t from-black via-black to-black/30"></span>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-screen h-screen -mb-[100vh] top-0 -z-20 fixed flex justify-center items-center relative">
+        <div
+          className={`absolute min-w-[100vw] h-[100vw] rounded-full backdrop-blur-md transition-all duration-700 ease-in-out ${
+            isHovered
+              ? "-translate-x-[20vw] bg-black"
+              : "-translate-x-[100vw] bg-black/0"
+          }`}
+        ></div>
+        <div
+          className={`absolute min-w-[100vw] h-[100vw] rounded-full backdrop-blur-md transition-all duration-700 ease-in-out ${
+            isHovered
+              ? "translate-x-[20vw] bg-black"
+              : "translate-x-[100vw] bg-black/0"
+          }`}
+        ></div>
+      </div>
     </>
   );
 };
