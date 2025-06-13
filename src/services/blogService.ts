@@ -1,7 +1,7 @@
 import { Blog } from "../types/blogType";
 import { slugify } from "../utils/slugify";
 
-const API_BASE_URL = "http://localhost:8080/api/blogs";
+const API_BASE_URL = "https://zenthink-backend.onrender.com/api/blogs";
 
 // Get all blogs
 export const getBlogs = async (category?: string): Promise<Blog[]> => {
@@ -48,7 +48,9 @@ export const addBlog = async (blog: Omit<Blog, "id">): Promise<Blog> => {
 // services/blogService.ts
 export const fetchBlogs = async (): Promise<Blog[]> => {
   try {
-    const response = await fetch("http://localhost:8080/api/blogs");
+    const response = await fetch(
+      "https://zenthink-backend.onrender.com/api/blogs"
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch blogs");
     }
@@ -61,7 +63,9 @@ export const fetchBlogs = async (): Promise<Blog[]> => {
 
 export const fetchBlogBySlug = async (slug: string): Promise<Blog | null> => {
   try {
-    const response = await fetch("http://localhost:8080/api/blogs");
+    const response = await fetch(
+      "https://zenthink-backend.onrender.com/api/blogs"
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch blogs");
     }
