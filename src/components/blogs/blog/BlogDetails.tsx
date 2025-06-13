@@ -46,7 +46,7 @@ const BlogDetails = () => {
   if (loading) {
     return (
       <div className="w-full max-w-[1440px] mx-auto py-20 flex justify-center">
-        <Spinner size="lg" />
+        <Spinner color="white" variant="gradient" />
       </div>
     );
   }

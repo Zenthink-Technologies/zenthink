@@ -29,7 +29,7 @@ const Blogs = () => {
   if (loading) {
     return (
       <div className="w-full max-w-[1440px] mx-auto py-20 flex justify-center">
-        <Spinner size="lg" />
+        <Spinner color="white" variant="gradient" />
       </div>
     );
   }
@@ -50,11 +50,11 @@ const Blogs = () => {
           <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-x-6 gap-y-40 md:gap-y-32 px-10 md:px-28 pb-36">
             {displayedBlogs.map((blog) => (
               <div
+                onClick={() => navigate(`/blog/${slugify(blog.title)}`)}
                 key={blog.id}
                 className="relative w-full flex items-center justify-center transition-all duration-500 ease-in-out"
               >
                 <div
-                  onClick={() => navigate(`/blog/${slugify(blog.title)}`)}
                   className="cursor-pointer relative min-w-full max-w-full h-[300px] md:h-[400px] xl:h-[500px] rounded-lg bg-white/5 overflow-hidden group transition-all duration-300 ease-in-out"
                   style={{
                     boxShadow: `

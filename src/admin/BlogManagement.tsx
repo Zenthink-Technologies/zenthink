@@ -454,6 +454,7 @@ const BlogManagement = () => {
                           Featured Image
                         </label>
                         <input
+                          title="/"
                           type="file"
                           accept="image/*"
                           onChange={(e) =>
@@ -592,6 +593,7 @@ const BlogManagement = () => {
                                   Image
                                 </label>
                                 <input
+                                  title="/"
                                   type="file"
                                   accept="image/*"
                                   onChange={async (e) => {
@@ -766,6 +768,7 @@ const BlogManagement = () => {
                             Image
                           </label>
                           <input
+                            title="/"
                             type="file"
                             accept="image/*"
                             onChange={async (e) => {

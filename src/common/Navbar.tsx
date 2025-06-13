@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { X } from "lucide-react";
 import Triangle from "../assets/triangle.svg";
 import Logo from "../assets/favicon.svg";
+import { Button } from "@heroui/button";
 
 interface Particle {
   element: HTMLDivElement;
@@ -24,9 +25,9 @@ interface TabContent {
 }
 
 const Navbar = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [, setIsHovered] = useState(isSmallScreen);
   const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => setIsOpen((prev) => !prev);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
@@ -34,21 +35,89 @@ const Navbar = () => {
   const leaveTimeout = useRef<NodeJS.Timeout | null>(null);
   const contentTimeout = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
-  const bodyRef = useRef<HTMLBodyElement | null>(null);
+  const [showZenSpark, setShowZenSpark] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [showZenSparkMain, setShowZenSparkMain] = useState(false);
+
+  const toggleMenu = () => {
+    setShowZenSpark(false);
+    setIsOpen((prev) => !prev);
+  };
 
   useEffect(() => {
-    bodyRef.current = document.querySelector("body");
-
-    if (isExpanded || isOpen) {
-      bodyRef.current?.classList.add("overflow-hidden");
+    if (isExpanded || isOpen || isSmallScreen) {
+      setIsHovered(true);
     } else {
-      bodyRef.current?.classList.remove("overflow-hidden");
+      setIsHovered(false);
     }
+  }, [isExpanded, isOpen, isSmallScreen]);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 1024);
+    };
+
+    // Check initially
+    checkScreenSize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkScreenSize);
 
     return () => {
-      bodyRef.current?.classList.remove("overflow-hidden");
+      window.removeEventListener("resize", checkScreenSize);
     };
-  }, [isExpanded, isOpen]);
+  }, []);
+
+  // Replace your hover handlers with click handlers
+  const toggleZenSpark = useCallback(() => {
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+
+    // Determine if we're opening or closing
+    const isOpening = !showZenSparkMain;
+
+    if (isOpening) {
+      // Opening sequence
+      setShowZenSparkMain(true);
+
+      // Close menu when opening ZenSpark
+      if (isOpen) {
+        setIsOpen(false);
+      }
+
+      // Show content after short delay
+      setTimeout(() => {
+        setShowZenSpark(true);
+        setIsAnimating(false);
+      }, 100);
+    } else {
+      // Closing sequence
+      setShowZenSpark(false);
+
+      // Hide container after animation completes
+      setTimeout(() => {
+        setShowZenSparkMain(false);
+        setIsAnimating(false);
+      }, 700);
+    }
+  }, [isAnimating, showZenSparkMain, isOpen]);
+
+  useEffect(() => {
+    const body = document.body;
+
+    // Only apply overflow-hidden if any of these conditions are true
+    if (isOpen) {
+      body.classList.add("overflow-hidden");
+    } else {
+      body.classList.remove("overflow-hidden");
+    }
+
+    // Cleanup function to ensure overflow is always re-enabled
+    return () => {
+      body.classList.remove("overflow-hidden");
+    };
+  }, [isExpanded, isOpen, showZenSpark]);
 
   // Tab content data
   const tabContents: Record<string, TabContent> = {
@@ -262,7 +331,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`pt-6 z-[9999] transition-all duration-500 ease-in-out ${
+        className={`pt-6 z-[99999] transition-all duration-500 ease-in-out ${
           isExpanded
             ? location.pathname.startsWith("/blogs")
               ? "pb-16"
@@ -302,7 +371,7 @@ const Navbar = () => {
                   <Link
                     key={key}
                     to={path}
-                    className={`w-[90px] flex justify-center items-center py-2.5 h-auto rounded-full relative
+                    className={`w-[90px] flex justify-center items-center py-[9px] h-auto rounded-full relative
                       group transition-all duration-300
                       after:absolute after:bottom-1 after:left-1/2 
                       after:rounded-full after:w-full after:h-[100px] after:top-5 after:bg-lime-600
@@ -325,6 +394,11 @@ const Navbar = () => {
                       }`}
                     onMouseEnter={() => handleTabEnter(key)}
                     onMouseLeave={handleTabLeave}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsExpanded(false);
+                      setHoveredTab(null);
+                    }}
                   >
                     <span className="text-white text-[15px] font-semibold relative z-10">
                       {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -419,11 +493,34 @@ const Navbar = () => {
             }`}
           >
             <div
-              className={`relative transition-all ease-in-out overflow-y-auto h-full w-[65vw] py-10 pt-28 rounded-l-[24px] duration-700 bg-gradient-to-tr from-black/70 to-white/0 backdrop-blur-lg bg-opacity-5 shadow-[0_0_20px_0_#000000,inset_0_-5px_5px_rgba(255,255,255,0.1),_inset_0_1px_2px_rgba(255,255,255,0.2)]`}
+              className={`relative transition-all ease-in-out overflow-y-auto h-full min-w-[250px] w-[65vw] pt-9 pb-10 rounded-l-[24px] duration-700 bg-gradient-to-tr from-black/70 to-white/0 backdrop-blur-lg bg-opacity-5 shadow-[0_0_20px_0_#000000,inset_0_-5px_5px_rgba(255,255,255,0.1),_inset_0_1px_2px_rgba(255,255,255,0.2)]`}
               onMouseEnter={handleTabsEnter}
-              onMouseLeave={handleTabsLeave}
+              onMouseLeave={() =>
+                !showZenSpark && !isSmallScreen && setIsHovered(false)
+              }
             >
-              <div className="flex flex-col space-y-3 top-0 px-5">
+              <Button
+                ref={buttonRef}
+                onPress={() => {
+                  toggleZenSpark();
+                }}
+                className="
+            lg:hidden relative ml-5 top-0 -mt-1.5 px-6 h-10 sm:h-[48px] bg-lime-500 text-white font-extrabold 
+            rounded-full border-2 border-lime-400
+            transition-all duration-300 ease-linear
+            [box-shadow:inset_2px_2px_4px_0_rgba(0,0,0,0.1),inset_-2px_-2px_4px_0_rgba(255,255,255,0.25)]
+            hover:bg-lime-500/90 active:scale-95
+            after:absolute after:bottom-1 after:left-1/2 
+            after:-translate-x-1/2 after:w-3 after:h-3
+            after:rounded-full
+            overflow-hidden
+            text-sm sm:text-base
+          "
+              >
+                <span className="mt-0.5">Our ZenSpart</span>
+              </Button>
+
+              <div className="flex flex-col space-y-3 top-0 mt-16 px-5">
                 {Object.entries(tabRoutes).map(([key, path]) => (
                   <Link
                     key={key}
@@ -451,7 +548,11 @@ const Navbar = () => {
                       }`}
                     onMouseEnter={() => handleTabEnter(key)}
                     onMouseLeave={handleTabLeave}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsExpanded(false);
+                      setHoveredTab(null);
+                    }}
                   >
                     <span className="text-white text-[15px] font-semibold relative z-10">
                       {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -511,26 +612,26 @@ const Navbar = () => {
           </div>
 
           {/* Hero Button */}
-          <div
+          <Button
+            ref={buttonRef}
             className="
-              hidden cursor-pointer lg:flex flex-col justify-start items-center gap-y-3
-              scale-1 md:scale-[0.8] lg:scale-[0.9] xl:scale-[1]
-              shadow-[0_0_20px_0px_#000000] lg:w-[130px] xl:w-[150px]
-              relative px-4 xl:px-0 h-[48px] bg-lime-500 text-white font-extrabold 
-              rounded-[24px] border-2 border-lime-400
-              transition-all duration-300 ease-linear
-              [box-shadow:inset_2px_2px_4px_0_rgba(0,0,0,0.1),inset_-2px_-2px_4px_0_rgba(255,255,255,0.2)]
-              hover:[box-shadow:inset_3px_3px_6px_0_rgba(0,0,0,0.2),inset_-3px_-3px_6px_0_rgba(255,255,255,0.3)]
-              hover:bg-lime-500/90 active:scale-95
-              after:absolute after:bottom-1 after:left-1/2 
-              after:-translate-x-1/2 after:w-3 after:h-3
-              after:rounded-full
-              overflow-hidden
-            "
+            hidden lg:block relative px-6 h-10 sm:h-[48px] bg-lime-500 text-white font-extrabold 
+            rounded-full border-2 border-lime-400
+            transition-all duration-300 ease-linear
+            [box-shadow:inset_2px_2px_4px_0_rgba(0,0,0,0.1),inset_-2px_-2px_4px_0_rgba(255,255,255,0.2)]
+            hover:[box-shadow:inset_3px_3px_6px_0_rgba(0,0,0,0.2),inset_-3px_-3px_6px_0_rgba(255,255,255,0.3)]
+            hover:bg-lime-500/90 active:scale-95
+            after:absolute after:bottom-1 after:left-1/2 
+            after:-translate-x-1/2 after:w-3 after:h-3
+            after:rounded-full
+            overflow-hidden
+            text-sm sm:text-base
+          "
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseLeave={() => !showZenSpark && setIsHovered(false)}
+            onPress={toggleZenSpark}
           >
-            <span className="z-10 mt-2.5">Our ZenSpart</span>
+            <span className="">Our ZenSpart</span>
 
             {/* Spark elements */}
             <span
@@ -544,60 +645,78 @@ const Navbar = () => {
                 after:hover:opacity-100 after:hover:animate-spark-x-reverse
               "
             ></span>
-          </div>
+          </Button>
         </div>
       </nav>
 
-      <div
-        className={`w-screen h-screen flex justify-center items-center cursor-pointer fixed top-0 -z-10 transition-all duration-700 ease-in-out ${
-          isHovered ? "opacity-100 scale-[1]" : "opacity-0 scale-[0.9]"
-        }`}
-      >
-        <div className="relative w-[80vw] md:w-[900px] md:scale-[0.7] lg:scale-[0.8] xl:scale-[1] bg-lime-500 shadow-[0_0_200px_0px_rgba(26,46,5,0.5)] overflow-hidden mx-auto rounded-lg h-[300px] flex flex-col md:flex-row transform transition-all">
-          <h1 className="text-white/10 text-[100px] md:text-[410px] -mt-[168px] font-sans font-bold">
-            SPARK
-          </h1>
-          {/* Content */}
-          <div className="absolute overflow-hidden pl-10 pr-10 md:pr-0 md:pl-[400px] w-full h-full bottom-0 right-0 bg-black/20 rounded-lg flex flex-col justify-center items-left">
-            <span className="absolute -top-48 -left-10 md:left-0 w-[350px] h-[350px] rounded-full bg-gradient-to-b from-black via-black to-black/30"></span>
-            <span className="hidden md:block md:w-[250px] absolute left-10 md:left-16 top-10 md:top-auto shadow-[0_0_20px_0px_#000000] rounded-full">
-              <img src={Logo} className="w-full h-auto scale-[1.01]" alt="" />
-            </span>
-            <p className="text-[80px] md:text-[100px] font-black text-white z-10 mb-8 leading-8">
-              ZenSpark
-            </p>
-            <p className="text-[14px] md:text-[18px] font-black text-white/70 mb-14 z-20 leading-4 md:leading-6">
-              Our ZenSpark is the love behind every line we write — a spark of
-              purpose, passion, and care that drives everything we create.
-            </p>
+      {/* ZenSpark Contents */}
+      {showZenSparkMain && (
+        <>
+          <div
+            className={`w-screen h-screen flex justify-center items-center cursor-pointer fixed top-0 -z-10 transition-all duration-700 ease-in-out ${
+              showZenSpark
+                ? "opacity-100 bottom-0 scale-[1]"
+                : "opacity-0 -bottom-[100vh] scale-[0.9]"
+            }`}
+          >
+            <div className="relative w-[80vw] md:w-[900px] md:scale-[0.7] lg:scale-[0.8] xl:scale-[1] bg-lime-500 shadow-[0_0_200px_0px_rgba(26,46,5,0.5)] overflow-hidden mx-auto rounded-lg h-[300px] flex flex-col md:flex-row transform transition-all">
+              <h1 className="text-white/10 text-[100px] md:text-[410px] -mt-[168px] font-sans font-bold">
+                SPARK
+              </h1>
+              {/* Content */}
+              <div className="absolute overflow-hidden pl-10 pr-10 md:pr-0 md:pl-[400px] w-full h-full bottom-0 right-0 bg-black/20 rounded-lg flex flex-col justify-center items-left">
+                <span className="absolute -top-48 -left-10 md:left-0 w-[350px] h-[350px] rounded-full bg-gradient-to-b from-black via-black to-black/30"></span>
+                <span className="hidden md:block md:w-[250px] absolute left-10 md:left-16 top-10 md:top-auto shadow-[0_0_20px_0px_#000000] rounded-full">
+                  <img
+                    src={Logo}
+                    className="w-full h-auto scale-[1.01]"
+                    alt=""
+                  />
+                </span>
+                <p className="text-[60px] md:text-[100px] font-black text-white z-10 mb-5 md:mb-8 leading-8">
+                  ZenSpark
+                </p>
+                <p className="text-[14px] md:text-[18px] font-black text-white/70 mb-14 z-20 leading-4 md:leading-6">
+                  Our ZenSpark is the love behind every line we write — a spark
+                  of purpose, passion, and care that drives everything we
+                  create.
+                </p>
+              </div>
+
+              {/* Name */}
+              <div className="absolute bottom-10 right-8 flex justify-center items-start">
+                <p className="z-10 text-[22px] font-black text-white/20 mt-10">
+                  Let's Think!
+                </p>
+                <span className="absolute w-[250px] h-[250px] rounded-full bg-gradient-to-t from-black via-black to-black/30"></span>
+              </div>
+            </div>
           </div>
 
-          {/* Name */}
-          <div className="absolute bottom-10 right-8 flex justify-center items-start">
-            <p className="z-10 text-[22px] font-black text-white/20 mt-10">
-              Let's Think!
-            </p>
-            <span className="absolute w-[250px] h-[250px] rounded-full bg-gradient-to-t from-black via-black to-black/30"></span>
+          <div
+            className={`w-screen h-screen top-0 -z-20 fixed flex justify-center items-center transition-all duration-700 ease-in-out  ${
+              showZenSpark ? "top-0" : "top-[100vh]"
+            }`}
+          >
+            <div className="w-screen h-screen top-0 -z-20 bg-transparent relative flex justify-center items-center transition-all duration-700 ease-in-out">
+              <div
+                className={`absolute min-w-[150vh] h-[150vh] lg:min-w-[100vw] lg:h-[100vw] rounded-full backdrop-blur-md transition-all duration-700 ease-in-out ${
+                  showZenSpark
+                    ? "-translate-x-[20vw] bg-black"
+                    : "-translate-x-[220vw] lg:-translate-x-[100vw] mb-0 bg-transparent"
+                }`}
+              ></div>
+              <div
+                className={`absolute min-w-[150vh] h-[150vh] lg:min-w-[100vw] lg:h-[100vw] rounded-full backdrop-blur-md transition-all duration-700 ease-in-out ${
+                  showZenSpark
+                    ? "translate-x-[20vw] bg-black"
+                    : "translate-x-[220vw] lg:translate-x-[100vw] bg-transparent"
+                }`}
+              ></div>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div className="w-screen h-screen -mb-[100vh] top-0 -z-20 fixed flex justify-center items-center relative">
-        <div
-          className={`absolute min-w-[100vw] h-[100vw] rounded-full backdrop-blur-md transition-all duration-700 ease-in-out ${
-            isHovered
-              ? "-translate-x-[20vw] bg-black"
-              : "-translate-x-[100vw] bg-black/0"
-          }`}
-        ></div>
-        <div
-          className={`absolute min-w-[100vw] h-[100vw] rounded-full backdrop-blur-md transition-all duration-700 ease-in-out ${
-            isHovered
-              ? "translate-x-[20vw] bg-black"
-              : "translate-x-[100vw] bg-black/0"
-          }`}
-        ></div>
-      </div>
+        </>
+      )}
     </>
   );
 };

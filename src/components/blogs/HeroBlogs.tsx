@@ -37,7 +37,7 @@ const HeroBlogs = () => {
   if (loading) {
     return (
       <div className="w-full max-w-[1440px] mx-auto h-auto pt-16 md:pt-24 py-14 flex justify-center">
-        <Spinner size="lg" />
+        <Spinner color="white" variant="gradient" />
       </div>
     );
   }
@@ -118,7 +118,16 @@ const HeroBlogs = () => {
             filteredBlogs.map((blog) => (
               <div key={blog.id} className="group">
                 <div
-                  onClick={() => navigate(`/blog/${slugify(blog.title)}`)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" &&
+                    navigate(`/blog/${slugify(blog.title)}`)
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(`/blog/${slugify(blog.title)}`, {
+                      state: { blog },
+                    });
+                  }}
                   className="cursor-pointer relative w-full md:min-w-[390px] max-w-full h-[400px] md:h-[500px] rounded-lg bg-white/5 overflow-hidden transition-all duration-300 ease-in-out"
                 >
                   <img
