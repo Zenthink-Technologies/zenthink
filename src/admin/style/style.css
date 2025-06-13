@@ -1,0 +1,39 @@
+.glow-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(163, 230, 53, 0.2),
+    transparent
+  );
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.clockwise {
+  animation-name: glow-clockwise;
+}
+
+.counter-clockwise {
+  animation-name: glow-counter-clockwise;
+}
+
+@keyframes glow-clockwise {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glow-counter-clockwise {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
