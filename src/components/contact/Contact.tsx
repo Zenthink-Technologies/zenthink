@@ -170,7 +170,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="w-full max-w-[350px] lg:max-w-[400px] space-y-4 sm:space-y-5">
+        <div className="w-full max-w-full lg:max-w-[400px] space-y-4 sm:space-y-5">
           {/* Card 1 */}
           <a
             href="tel:9944500207"
