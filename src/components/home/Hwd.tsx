@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react";
-import Favicon from "../../assets/favicon.svg";
+import Favicon1 from "../../assets/tools/miro.svg";
+import Favicon2 from "../../assets/tools/jira.svg";
+import Favicon3 from "../../assets/tools/figma.svg";
+import Favicon4 from "../../assets/tools/android_studio.svg";
+import Favicon5 from "../../assets/tools/postman.svg";
+import Favicon6 from "../../assets/tools/mongodb.svg";
+import Favicon7 from "../../assets/tools/docker.svg";
+import Favicon8 from "../../assets/tools/github.svg";
+import Favicon9 from "../../assets/tools/aws.svg";
+import Favicon10 from "../../assets/tools/firebase.svg";
+import Favicon11 from "../../assets/tools/google_analytics.svg";
+
 const Hwd = () => {
   // Array of unique image URLs, one for each icon (index 0 to 10)
   const iconUrls = [
-    Favicon, // top-left corner
-    Favicon, // top icon 1
-    Favicon, // top icon 2
-    Favicon, // top icon 3
-    Favicon, // top-right corner
-    Favicon, // bottom-right corner
-    Favicon, // bottom icon 1
-    Favicon, // bottom icon 2
-    Favicon, // bottom icon 3
-    Favicon, // bottom icon 4
-    Favicon, // bottom-left corner
+    Favicon1, // top-left corner
+    Favicon2, // top icon 1
+    Favicon3, // top icon 2
+    Favicon4, // top icon 3
+    Favicon5, // top-right corner
+    Favicon6, // bottom-right corner
+    Favicon7, // bottom icon 1
+    Favicon8, // bottom icon 2
+    Favicon9, // bottom icon 3
+    Favicon10, // bottom icon 4
+    Favicon11, // bottom-left corner
   ];
 
   // Corner points
@@ -139,24 +150,36 @@ const Hwd = () => {
             }
 
             return (
-              <img
-                key={`icon-${i}`}
-                src={iconUrls[i]}
-                alt={`icon-${i}`}
+              <div
+                key={`icon-container-${i}`}
                 style={{
                   position: "absolute",
                   width: 30,
                   height: 30,
                   left: x - 15,
                   top: y - 15,
-                  padding: "1.5px",
-                  backgroundColor: "darkgray",
+                  padding: "6px",
+                  backgroundColor: "#000000",
+                  border: "2px solid #171717",
                   borderRadius: "50%",
                   filter: isActive ? "none" : "grayscale(100%) saturate(0%)",
-                  transition: "filter 0.5s ease",
+                  transition: "filter 0.7s ease",
                 }}
-                draggable={false}
-              />
+              >
+                <img
+                  key={`icon-${i}`}
+                  src={iconUrls[i]}
+                  alt={`icon-${i}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    opacity: isActive ? "100%" : "50%",
+                    transition: "opacity 0.7s ease",
+                  }}
+                  draggable={false}
+                />
+              </div>
             );
           })}
         </div>
