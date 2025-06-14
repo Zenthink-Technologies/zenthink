@@ -21,7 +21,7 @@ interface CarouselConfig {
 
 const CAROUSEL_CONFIG: CarouselConfig = {
   columns: 4,
-  itemsPerColumn: 6,
+  itemsPerColumn: 4,
   baseSpeed: 0.3,
   speedVariations: [1, 1.4, 1.8, 1.2],
 };
@@ -83,7 +83,7 @@ const CarouselColumn: React.FC<CarouselColumnProps> = React.memo(
     // Create enough items to ensure seamless looping
     const items = React.useMemo(() => {
       const itemsArray = [];
-      const totalSets = 3; // Triple the items for seamless loop
+      const totalSets = 4; // Triple the items for seamless loop
 
       for (let set = 0; set < totalSets; set++) {
         for (let i = 0; i < CAROUSEL_CONFIG.itemsPerColumn; i++) {
@@ -185,7 +185,35 @@ CarouselColumn.displayName = "CarouselColumn";
 
 const OptimizedCarousel: React.FC = () => {
   const [isAnimating, setIsAnimating] = useState(true);
+  const [perspective, setPerspective] = useState("1000px");
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Update perspective based on screen size
+  useEffect(() => {
+    const updatePerspective = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setPerspective("400px");
+      } else if (width < 768) {
+        setPerspective("400px");
+      } else if (width < 1024) {
+        setPerspective("500px");
+      } else if (width < 1280) {
+        setPerspective("600px");
+      } else {
+        setPerspective("1000px");
+      }
+    };
+
+    // Set initial value
+    updatePerspective();
+
+    // Add event listener
+    window.addEventListener("resize", updatePerspective);
+
+    // Clean up
+    return () => window.removeEventListener("resize", updatePerspective);
+  }, []);
 
   // Pause animation when not visible (performance optimization)
   useEffect(() => {
@@ -209,8 +237,8 @@ const OptimizedCarousel: React.FC = () => {
       className="relative w-screen max-w-[1440px] mx-auto overflow-hidden"
     >
       {/* Gradient overlays */}
-      <div className="absolute top-[15px] sm:top-[25px] md:top-[52px] lg:top-[50px] xl:top-[65px] left-0 right-0 h-16 sm:h-24 lg:h-32 bg-gradient-to-b from-black to-transparent z-10" />
-      <div className="absolute bottom-[37px] sm:bottom-[50px] md:bottom-[62px] lg:bottom-[68px] xl:bottom-[70px] left-0 right-0 h-16 sm:h-24 lg:h-32 bg-gradient-to-t from-black to-transparent z-10" />
+      <div className="absolute top-[20px] sm:top-[35px] md:top-[65px] lg:top-[60px] xl:top-[65px] left-0 right-0 h-16 sm:h-24 lg:h-32 bg-gradient-to-b from-black to-transparent z-10" />
+      <div className="absolute bottom-[27px] sm:bottom-[25px] md:bottom-[28px] lg:bottom-[30px] xl:bottom-[70px] left-0 right-0 h-16 sm:h-24 lg:h-32 bg-gradient-to-t from-black to-transparent z-10" />
       <div className="absolute top-0 left-0 bottom-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-r from-black to-transparent z-10" />
       <div className="absolute top-0 right-0 bottom-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-l from-black to-transparent z-10" />
 
@@ -223,7 +251,7 @@ const OptimizedCarousel: React.FC = () => {
           -mt-8 sm:-mt-12 lg:-mt-20 xl:-mt-24
         "
         style={{
-          perspective: "1000px",
+          perspective,
           transformStyle: "preserve-3d",
         }}
       >
