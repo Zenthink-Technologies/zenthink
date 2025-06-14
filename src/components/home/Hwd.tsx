@@ -77,7 +77,7 @@ const Hwd = () => {
         </h1>
 
         <div
-          className="mt-8 sm:mt-14 md:mt-20 lg:mt-24 xl:mt-32 mx-auto 
+          className="hwd-scale mt-8 sm:mt-14 md:mt-20 lg:mt-24 xl:mt-32 mx-auto 
           flex justify-center items-center relative scale-[0.9] sm:scale-[1.5] md:scale-[2] lg:scale-[2.5] xl:scale-[3]"
           style={{ width: 300, height: 40 }}
         >
