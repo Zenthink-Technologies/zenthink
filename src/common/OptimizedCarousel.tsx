@@ -83,7 +83,7 @@ const CarouselColumn: React.FC<CarouselColumnProps> = React.memo(
     // Create enough items to ensure seamless looping
     const items = React.useMemo(() => {
       const itemsArray = [];
-      const totalSets = 4; // Triple the items for seamless loop
+      const totalSets = 4; // Items for seamless loop
 
       for (let set = 0; set < totalSets; set++) {
         for (let i = 0; i < CAROUSEL_CONFIG.itemsPerColumn; i++) {
@@ -103,39 +103,50 @@ const CarouselColumn: React.FC<CarouselColumnProps> = React.memo(
 
     const animate = React.useCallback(
       (currentTime: number) => {
+        // Initialize with current time if first frame
         if (!lastTimeRef.current) {
           lastTimeRef.current = currentTime;
+          animationRef.current = requestAnimationFrame(animate);
+          return; // Skip first frame to prevent jump
         }
 
         const deltaTime = currentTime - lastTimeRef.current;
         lastTimeRef.current = currentTime;
 
+        // Skip if time between frames is too large (tab was inactive)
+        if (deltaTime > 100) {
+          animationRef.current = requestAnimationFrame(animate);
+          return;
+        }
+
         const speed =
           CAROUSEL_CONFIG.baseSpeed *
           CAROUSEL_CONFIG.speedVariations[columnIndex];
-        const pixelsPerMs = speed * 0.1; // Convert to pixels per millisecond
-        const movement = pixelsPerMs * deltaTime;
+        const pixelsPerMs = speed * 0.1;
+        const movement = pixelsPerMs * Math.min(deltaTime, 16); // Cap at 16ms (60fps)
+
+        // Calculate responsive heights
+        const itemHeight =
+          window.innerWidth < 640
+            ? 56
+            : window.innerWidth < 768
+            ? 76
+            : window.innerWidth < 1024
+            ? 108
+            : window.innerWidth < 1280
+            ? 148
+            : 168;
+
+        const singleSetHeight =
+          itemHeight * CAROUSEL_CONFIG.itemsPerColumn - 15;
+        const resetThreshold = singleSetHeight; // Reset slightly before full height
 
         setTranslateY((prev) => {
           const newTranslateY = prev - movement;
 
-          // Calculate when to reset - when one full set has scrolled
-          const itemHeight =
-            window.innerWidth < 640
-              ? 56 // 48px + 8px margin
-              : window.innerWidth < 768
-              ? 76 // 64px + 12px margin
-              : window.innerWidth < 1024
-              ? 108 // 96px + 12px margin
-              : window.innerWidth < 1280
-              ? 148 // 128px + 20px margin
-              : 168; // 144px + 24px margin
-
-          const singleSetHeight = itemHeight * CAROUSEL_CONFIG.itemsPerColumn;
-
-          // Reset when we've scrolled past one complete set
-          if (Math.abs(newTranslateY) >= singleSetHeight) {
-            return newTranslateY + singleSetHeight;
+          // Smooth reset with early threshold
+          if (Math.abs(newTranslateY) >= resetThreshold) {
+            return newTranslateY % singleSetHeight; // Modulo for seamless looping
           }
 
           return newTranslateY;
