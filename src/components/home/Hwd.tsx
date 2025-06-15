@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Favicon1 from "../../assets/tools/miro.svg";
-import Favicon2 from "../../assets/tools/jira.svg";
-import Favicon3 from "../../assets/tools/figma.svg";
-import Favicon4 from "../../assets/tools/android_studio.svg";
+import Favicon2 from "../../assets/tools/figma.svg";
+import Favicon3 from "../../assets/tools/jira.svg";
+import Favicon4 from "../../assets/tools/vscode.svg";
 import Favicon5 from "../../assets/tools/postman.svg";
-import Favicon6 from "../../assets/tools/mongodb.svg";
+import Favicon6 from "../../assets/tools/firebase.svg";
 import Favicon7 from "../../assets/tools/docker.svg";
 import Favicon8 from "../../assets/tools/github.svg";
-import Favicon9 from "../../assets/tools/aws.svg";
-import Favicon10 from "../../assets/tools/firebase.svg";
-import Favicon11 from "../../assets/tools/google_analytics.svg";
+import Favicon9 from "../../assets/tools/google_analytics.svg";
+import Favicon10 from "../../assets/tools/aws.svg";
+import Favicon11 from "../../assets/tools/play_store.svg";
 
 const Hwd = () => {
   // Array of unique image URLs, one for each icon (index 0 to 10)
